@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+<main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 th:text="${contenido}"></h1>
+
+    <form th:action="@{/pacientes/salvar-paciente}" th:object="${paciente}"
+          method="post">
+    <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="nombre" style="color: black;">Nombre Paciente</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre"
+                           placeholder="Nombre Paciente" required="required"
+                           th:field="*{nombre}">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="apellido" style="color: black;">Apellido Paciente</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido"
+                           placeholder="Apellido Paciente" required="required"
+                           th:field="*{apellidos}">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="fecha" style="color: black;">Fecha nacimiento</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha"
+                           placeholder="Fecha nacimiento" required="required"
+                           th:field="*{fechaDeNacimiento}">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="genero" style="color: black;">Genero</label>
+                    <select class="form-control" th:field="*{genero}" id="genero" name="genero" required>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="numeroDeSeguridad" style="color: black;">Número de Seguridad</label>
+                    <input type="text" class="form-control" id="numeroDeSeguridad" name="numeroDeSeguridad"
+                           placeholder="Numero de Seguridad" required="required"
+                           th:field="*{numeroDeSeguridad}">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <br/>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+
+</main>
+<footer th:replace="~{plantillas/plantilla::footer}"></footer>
+</body>
+</html>

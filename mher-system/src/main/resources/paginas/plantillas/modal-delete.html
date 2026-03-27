@@ -1,0 +1,50 @@
+<!---->
+<div th:if="${productos!=null}" th:fragment="modal-eliminar" class="modal fade" th:id="'confirmDelete'+${prod.id_producto}"  xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5>Confirmar eliminación</h5>
+            </div>
+
+            <div class="modal-body">
+                ¿Deseas eliminar este registro?
+            </div>
+
+            <div class="modal-footer">
+                <a th:href="@{/productos/eliminar-producto/{id} (id=${prod.id_producto})}"
+                   class="btn btn-danger">
+                    Sí eliminar
+                </a>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:if="${cliente!=null}" th:fragment="modal-eliminar" class="modal fade" th:id="'confirmDelete'+${clie.id_cliente}"  xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5>Confirmar eliminación</h5>
+            </div>
+
+            <div class="modal-body">
+                ¿Deseas eliminar este registro?
+            </div>
+
+            <div class="modal-footer">
+                <a th:href="@{/clientes/eliminar-cliente/{id} (id=${clie.id_cliente})}"
+                   class="btn btn-danger">
+                    Sí eliminar
+                </a>
+
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

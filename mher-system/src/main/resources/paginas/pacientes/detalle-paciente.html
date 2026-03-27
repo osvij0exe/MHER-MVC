@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+<main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 th:text="${contenido}"></h1>
+
+    <form th:action="@{/pacientes/salvar-paciente}" th:object="${paciente}"
+          method="post">
+    <input type="hidden" name="pacienteId" th:value="${paciente.pacienteId}" />
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="nombre" style="color: black;">Nombre Paciente</label>
+                    <input type="text" disabled class="form-control" id="nombre" name="nombre"
+                           placeholder="Nombre Paciente" required="required"
+                           th:field="*{nombre}">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="apellido" style="color: black;">Apellido Paciente</label>
+                    <input type="text" disabled class="form-control" id="apellido" name="apellido"
+                           placeholder="Apellido Paciente" required="required"
+                           th:field="*{apellidos}">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="fecha" style="color: black;">Fecha nacimiento</label>
+                    <input type="date" disabled class="form-control" id="fecha" name="fecha"
+                           placeholder="Fecha nacimiento" required="required"
+                           th:field="*{fechaDeNacimiento}">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="genero" style="color: black;">Genero</label>
+                    <select class="form-control" disabled th:field="*{genero}" id="genero" name="genero" required>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="numeroDeSeguridad" style="color: black;">Número de Seguridad</label>
+                    <input type="text" disabled class="form-control" id="numeroDeSeguridad" name="numeroDeSeguridad"
+                           placeholder="Numero de Seguridad" required="required"
+                           th:field="*{numeroDeSeguridad}">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mr-3">
+            <br/>
+            <a th:href="@{/pacientes/modificar-paciente/{pacienteId} (pacienteId=${pacienteId})}"
+               class="btn btn-success">Editar Paciente<i class="bi bi-pencil" aria-hidden="true"></i> </a>
+            <a th:href="@{/citas/agregar-cita/{id}(id=${paciente.pacienteId})}"
+               class="btn btn-info">Agendar Cita<i class="bi bi-pencil" aria-hidden="true"></i> </a>
+        </div>
+    </form>
+
+
+    <table th:if="${paciente.citas != null and !paciente.citas.isEmpty()}" class="table table-striped table-hover table-sm mt-4">
+
+        <thead class="table-dark table-bordered">
+        <tr>
+            <th scope="col"> Nombre Médico</th>
+            <th scope="col"> Apellido Médico</th>
+            <th scope="col"> Especialidad</th>
+            <th scope="col"> Fecha Consultas</th>
+            <th scope="col"> Estado cita</th>
+            <th scope="col"> Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cit: ${paciente.citas}">
+            <td th:text="${cit.doctor.nombre}"></td>
+            <td th:text="${cit.doctor.apellidos}"></td>
+            <td th:text="${cit.doctor.especialidad.nombreEspecialidad}"></td>
+            <td th:text="${cit.citaInicio}"></td>
+            <td th:text="${cit.citaEstado}"></td>
+            <td>
+                <a th:href="@{/citas/modificar-cita/paciente/{pacienteId}/cita/{citaId}
+                    (pacienteId=${pacienteId}, citaId=${cit.citaId})}"
+                   class="btn btn-success">Modificar <i class="bi bi-pencil"
+                                                        aria-hidden="true"></i> </a>
+                <!--                    <a th:href="@{/citas/eliminar-cita/{id} (id=${cita.citaId})}"-->
+                <!--                       class="btn btn-danger"><i class="bi bi-trash-fill"-->
+                <!--                                                 aria-hidden="true"></i>Eliminar </a>-->
+                <div th:replace="~{plantillas/modal-delete :: modal-eliminar}"></div>
+                <button class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        th:data-bs-target="'#confirmDelete'+${cit.citaId}">
+                    <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                    Eliminar
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</main>
+<footer th:replace="~{plantillas/plantilla::footer}"></footer>
+</body>
+</html>

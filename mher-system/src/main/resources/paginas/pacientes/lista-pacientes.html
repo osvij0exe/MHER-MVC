@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{plantillas/plantilla :: header}"></header>
+    <main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <h1 th:text="${contenido}"></h1>
+
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-primary" th:href="@{/pacientes/agregar-paciente}" role="button">Agregar Paciente</a>
+        </div>
+        <form th:action="@{/pacientes/lista-pacientes}" method="get" class="d-flex mb-3">
+
+            <input class="form-control me-2"
+                   type="text"
+                   name="search"
+                   placeholder="Buscar paciente por nombre o apellido"
+                   th:value="${param.search}">
+
+            <button class="btn btn-primary" type="submit">
+                Buscar
+            </button>
+        </form>
+
+        <nav th:replace="~{plantillas/pag-nav::paginador}"/>
+
+        </div>
+
+        <table th:if="${!pacientes.isEmpty()}" class="table table-striped table-hover table-sm">
+
+            <thead class="table-dark table-bordered">
+            <tr>
+                <th scope="col"> Nombre Paciente</th>
+                <th scope="col"> Apellido Paciente</th>
+                <th scope="col"> Genero</th>
+                <th scope="col"> Numero de Segurodad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pac: ${pacientes}">
+                <td th:text="${pac.nombre}"></td>
+                <td th:text="${pac.apellidos}"></td>
+                <td th:text="${pac.genero}"></td>
+                <td th:text="${pac.numeroDeSeguridad}"></td>
+                <td>
+                    <a th:href="@{/pacientes/detalle-paciente/{pacienteId} (pacienteId=${pac.pacienteId})}"
+                       class="btn btn-success">Detalles Paciente<i class="bi bi-pencil"
+                                                            aria-hidden="true"></i> </a>
+            </tr>
+            </tbody>
+        </table>
+
+    </main>
+    <footer th:replace="~{plantillas/plantilla::footer}"></footer>
+</body>
+</html>

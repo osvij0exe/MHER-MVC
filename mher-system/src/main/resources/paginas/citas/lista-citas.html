@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+<div class="container-flruid">
+<!--    <div th:replace="~{plantillas/plantilla :: alerts}"></div>-->
+
+    <main class="container text-center col-md-10 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <h1 th:text="${contenido}"></h1>
+    <div>
+        <div class="d-flex justify-content-end mb-3">
+            <a class="btn btn-primary" th:href="@{/citas/agregar-cita}" role="button">Agregar</a>
+        </div>
+        <form th:action="@{/citas/lista-citas}" method="get" class="d-flex mb-3">
+
+            <input class="form-control me-2"
+                   type="text"
+                   name="search"
+                   placeholder="Buscar paciente o doctor"
+                   th:value="${param.search}">
+
+            <button class="btn btn-primary" type="submit">
+                Buscar
+            </button>
+        </form>
+
+        <nav th:replace="~{plantillas/pag-nav::paginador}"/>
+
+    </div>
+
+        <table th:if="${!citas.isEmpty()}" class="table table-striped table-hover table-sm">
+
+            <thead class="table-dark table-bordered">
+            <tr>
+                <th scope="col"> Nombre Médico</th>
+                <th scope="col"> Apellido Médico</th>
+                <th scope="col"> Especialidad</th>
+                <th scope="col"> Nombre Paciente</th>
+                <th scope="col"> Apellido Páciente</th>
+                <th scope="col"> Fecha Consultas</th>
+                <th scope="col"> Estado cita</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cit: ${citas}">
+                <td th:text="${cit.doctor.nombre}"></td>
+                <td th:text="${cit.doctor.apellidos}"></td>
+                <td th:text="${cit.doctor.especialidad.nombreEspecialidad}"></td>
+                <td th:text="${cit.paciente.nombre}"></td>
+                <td th:text="${cit.paciente.apellidos}"></td>
+                <td th:text="${cit.citaInicio}"></td>
+                <td th:text="${cit.citaEstado}"></td>
+                <td>
+                    <a th:href="@{/citas/modificar-cita/{id} (id=${cit.citaId})}"
+                       class="btn btn-success">Modificar <i class="bi bi-pencil"
+                                                            aria-hidden="true"></i> </a>
+                    <!--                    <a th:href="@{/productos/eliminar-producto/{id} (id=${prod.id_producto})}"-->
+                    <!--                       class="btn btn-danger"><i class="bi bi-trash-fill"-->
+                    <!--                                                 aria-hidden="true"></i>Eliminar </a>-->
+                    <div th:replace="~{plantillas/modal-delete :: modal-eliminar}"></div>
+                    <button class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            th:data-bs-target="'#confirmDelete'+${cit.citaId}">
+                        <i class="bi bi-trash-fill" aria-hidden="true"></i>
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </main>
+</div>
+<footer th:replace="~{plantillas/plantilla::footer}"></footer>
+<div th:replace="~{plantillas/plantilla::paginaScripts}"></div>
+</body>
+</html>
