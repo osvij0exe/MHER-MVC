@@ -19,7 +19,7 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="nombre" style="color: black;">Nombre Paciente</label>
-                    <input type="text" disabled class="form-control" id="nombre" name="nombre"
+                    <input type="text" readonly class="form-control" id="nombre" name="nombre"
                            placeholder="Nombre Paciente" required="required"
                            th:field="*{paciente.nombre}">
                 </div>
@@ -27,7 +27,7 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="apellido" style="color: black;">Apellido Paciente</label>
-                    <input type="text" disabled class="form-control" id="apellido" name="apellido"
+                    <input type="text" readonly class="form-control" id="apellido" name="apellido"
                            placeholder="Apellido Paciente" required="required"
                            th:field="*{paciente.apellidos}">
                 </div>
@@ -35,7 +35,7 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="fechaNacimiento" style="color: black;">Fecha nacimiento</label>
-                    <input type="date" disabled class="form-control" id="fechaNacimiento" name="fechaNacimiento"
+                    <input type="date" readonly class="form-control" id="fechaNacimiento" name="fechaNacimiento"
                            placeholder="Fecha nacimiento" required="required"
                            th:field="*{paciente.fechaDeNacimiento}">
                 </div>
@@ -43,7 +43,7 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="genero" style="color: black;">Genero</label>
-                    <select class="form-control" disabled th:field="*{paciente.genero}" id="genero" name="genero" required>
+                    <select class="form-control" readonly th:field="*{paciente.genero}" id="genero" name="genero" required>
                         <option value="M">M</option>
                         <option value="F">F</option>
                     </select>
@@ -52,7 +52,7 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="numeroDeSeguridad" style="color: black;">Número de Seguridad</label>
-                    <input type="text" disabled class="form-control" id="numeroDeSeguridad" name="numeroDeSeguridad"
+                    <input type="text" readonly class="form-control" id="numeroDeSeguridad" name="numeroDeSeguridad"
                            placeholder="Numero de Seguridad" required="required"
                            th:field="*{paciente.numeroDeSeguridad}">
                 </div>
@@ -114,7 +114,7 @@
                         <option th:each="doc :${doctores}"
                                 th:value="${doc.doctorId}"
                                 th:text="${doc.nombreCompleto}"
-                        th:selected="${doc.doctorId == citaRequest.doctor.doctorId}">
+                                th:selected="${citaRequest.doctor != null && doc.doctorId == citaRequest.doctor.doctorId}">
                         </option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('doctor*')}"

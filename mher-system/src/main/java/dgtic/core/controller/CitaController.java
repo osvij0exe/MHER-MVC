@@ -161,10 +161,6 @@ public class CitaController {
         citasRequest.setPaciente(pacienteService.findById(pacienteId));
         citasRequest.setCitaId(citaId);
 
-        if(bindingResult.hasErrors()){
-            model.addAttribute("warning","Corrige los errores del formulario");
-            return "citas/modificar-cita";
-        }
 
         if (citasRequest.getEspecialidad() != null &&
                 citasRequest.getEspecialidad().getEspecialidadId() != null) {
@@ -180,6 +176,11 @@ public class CitaController {
         if (citasRequest.getDoctor() == null ||
                 citasRequest.getDoctor().getDoctorId() == null) {
             model.addAttribute("warning", "Selecciona un doctor");
+            return "citas/modificar-cita";
+        }
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("warning","Corrige los errores del formulario");
             return "citas/modificar-cita";
         }
 

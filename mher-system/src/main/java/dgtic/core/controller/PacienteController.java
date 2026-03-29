@@ -8,12 +8,14 @@ import dgtic.core.model.dto.Response.PacienteCitasResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import dgtic.core.service.pacienteService.PacienteService;
 import dgtic.core.util.RenderPagina;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -71,8 +73,18 @@ public class PacienteController {
 
 
     @PostMapping(value = "salvar-paciente")
-    public String guardarPaciente(@RequestParam()Integer pacienteId,@ModelAttribute PacienteRequest pacienteRequest,
-                                 Model model) {
+    public String guardarPaciente(@RequestParam(required = false)Integer pacienteId,
+                                  @Valid @ModelAttribute("datos") PacienteRequest pacienteRequest,
+                                  BindingResult bindingResult,
+                                  Model model) {
+
+        if(bindingResult.hasErrors())
+        {
+            model.addAttribute("contenido", "Agregar Paciente");
+            model.addAttribute("datos", pacienteRequest);
+            return "pacientes/agregar-paciente";
+        }
+
 
         if(pacienteId != null)
         {
@@ -87,7 +99,7 @@ public class PacienteController {
 
             pacienteService.save(pacienteRequest);
             model.addAttribute("datos", new PacienteRequest());
-            return "pacientes/agregar-paciente";
+            return "redirect:/pacientes/lista-pacientes";
 
     }
 
