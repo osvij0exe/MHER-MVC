@@ -9,6 +9,7 @@
 - Servicio de Citas implementado
  1. Implemenatación de CRUD completo
 
-
+## Video Descriptivo
+- https://drive.google.com/file/d/1amNQhlc0Cnr7X2uTEUgdACrkP2_khwDZ/view?usp=sharing
 
 
