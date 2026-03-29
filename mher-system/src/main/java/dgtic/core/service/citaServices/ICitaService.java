@@ -7,12 +7,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ICitaService {
     List<CitasResponse> findAll();
     CitasResponse findById(Integer id);
+    CitasResponse findByIdWithRelations(Integer id);
     CitasResponse findByIdWithDoctorAndSpecialities(Integer id);
     CitasResponse save(CitasRequest clienteDTO);
     void deleteById(Integer id);

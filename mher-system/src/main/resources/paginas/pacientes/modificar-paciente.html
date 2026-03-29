@@ -57,6 +57,8 @@
         <div class="col-md-3">
             <br/>
             <button type="submit" class="btn btn-primary">Guardar</button>
+            <a th:href="@{/pacientes/detalle-paciente/{pacienteId}(pacienteId=${paciente.pacienteId})}"
+               class="btn btn-info">Regresar</a>
         </div>
     </form>
 

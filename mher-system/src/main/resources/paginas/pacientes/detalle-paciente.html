@@ -88,16 +88,10 @@
                     (pacienteId=${pacienteId}, citaId=${cit.citaId})}"
                    class="btn btn-success">Modificar <i class="bi bi-pencil"
                                                         aria-hidden="true"></i> </a>
-                <!--                    <a th:href="@{/citas/eliminar-cita/{id} (id=${cita.citaId})}"-->
-                <!--                       class="btn btn-danger"><i class="bi bi-trash-fill"-->
-                <!--                                                 aria-hidden="true"></i>Eliminar </a>-->
-                <div th:replace="~{plantillas/modal-delete :: modal-eliminar}"></div>
-                <button class="btn btn-danger"
-                        data-bs-toggle="modal"
-                        th:data-bs-target="'#confirmDelete'+${cit.citaId}">
-                    <i class="bi bi-trash-fill" aria-hidden="true"></i>
-                    Eliminar
-                </button>
+                <a th:href="@{/citas/eliminar-cita/paciente/{pacienteId}/cita/{citaId}
+                 (pacienteId=${pacienteId}, citaId=${cit.citaId})}"
+                   class="btn btn-danger"><i class="bi bi-trash-fill"
+                                             aria-hidden="true"></i>Eliminar </a>
             </td>
         </tr>
         </tbody>

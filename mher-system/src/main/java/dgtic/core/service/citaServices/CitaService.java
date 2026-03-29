@@ -39,11 +39,17 @@ public class CitaService implements  ICitaService{
     public CitasResponse findById(Integer id) {
         Optional<Cita>  cita = citaRepository.findById(id);
 
-        //Vlidar
+        //Validar
 
         CitasResponse response = CitasMapper.ToDto(cita.get());
 
         return response;
+    }
+
+    @Override
+    public CitasResponse findByIdWithRelations(Integer id) {
+         Cita cita = citaRepository.findByIdWithRelations(id).orElse(null);
+         return  CitasMapper.ToDto(cita);
     }
 
     @Override

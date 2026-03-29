@@ -189,4 +189,38 @@ public class CitaController {
     }
 
 
+    @GetMapping("eliminar-cita/paciente/{pacienteId}/cita/{citaId}")
+    public String eliminarCita(
+            @PathVariable("pacienteId") Integer pacienteId,
+            @PathVariable("citaId") Integer citaId,
+            Model model) {
+
+        CitasResponse citasResponse = citaService.findByIdWithRelations(citaId);
+
+        model.addAttribute("contenido", "Eliminar cita");
+        model.addAttribute("citaRequest", citasResponse);
+
+
+        return "citas/eliminar-cita";
+    }
+
+
+    @PostMapping("eliminar-cita/paciente/{pacienteId}/cita/{citaId}")
+    public String eliminarCitaDePaciente(
+            @PathVariable("pacienteId") Integer pacienteId,
+            @PathVariable("citaId") Integer citaId,
+            Model model) {
+
+        CitasResponse citasResponse = citaService.findByIdWithRelations(citaId);
+
+        model.addAttribute("contenido", "Eliminar cita");
+        model.addAttribute("citaRequest", citasResponse);
+
+        citaService.deleteById(citasResponse.getCitaId());
+
+        return "redirect:/pacientes/detalle-paciente/" + pacienteId;
+    }
+
+
+
 }

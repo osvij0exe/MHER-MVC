@@ -47,7 +47,7 @@ public class PacienteController {
     public String DetallePaciente(@PathVariable("pacienteId") Integer pacienteId,Model modelo){
         PacienteCitasResponse pacienteResponse = pacienteService.findPacienteCitasById(pacienteId);
         modelo.addAttribute("paciente",pacienteResponse);
-        modelo.addAttribute("contenido","Modificar paciente");
+        modelo.addAttribute("contenido","Detalles del paciente");
         return "pacientes/detalle-paciente";
     }
 

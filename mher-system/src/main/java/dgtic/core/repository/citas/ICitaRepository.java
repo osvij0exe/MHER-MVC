@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface ICitaRepository extends JpaRepository<Cita,Integer> {
 
@@ -30,6 +31,15 @@ public interface ICitaRepository extends JpaRepository<Cita,Integer> {
         """)
     public List<Cita> obtenerCitasPendientes(@Param("search")String search);
 
+    @Query("""
+        SELECT c
+        FROM Cita c
+        LEFT JOIN FETCH c.paciente p
+        LEFT JOIN FETCH c.doctor d
+        LEFT JOIN FETCH d.especialidad e
+        WHERE c.id = :id
+        """)
+    public Optional<Cita> findByIdWithRelations(Integer id);
 
     @Query("""
         SELECT COUNT(c) > 0

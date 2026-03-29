@@ -9,7 +9,7 @@
 
     <form
           id="citaForm"
-          th:action="@{/citas/modificar-cita/paciente/{pid}/cita/{cid}(pid=${citaRequest.paciente.pacienteId}, cid=${citaRequest.citaId})}" th:object="${citaRequest}"
+          th:action="@{/citas/eliminar-cita/paciente/{pacienteId}/cita/{citaId}(pacienteId=${citaRequest.paciente.pacienteId}, citaId=${citaRequest.citaId})}" th:object="${citaRequest}"
           method="post">
         <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
         <input type="hidden"  name="citaId" th:value="${citaRequest.citaId}">
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label for="nombre" style="color: black;">Nombre Paciente</label>
                     <input type="text" disabled class="form-control" id="nombre" name="nombre"
-                           placeholder="Nombre Paciente" required="required"
+                           placeholder="Nombre Paciente"
                            th:field="*{paciente.nombre}">
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label for="apellido" style="color: black;">Apellido Paciente</label>
                     <input type="text" disabled class="form-control" id="apellido" name="apellido"
-                           placeholder="Apellido Paciente" required="required"
+                           placeholder="Apellido Paciente"
                            th:field="*{paciente.apellidos}">
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label for="fechaNacimiento" style="color: black;">Fecha nacimiento</label>
                     <input type="date" disabled class="form-control" id="fechaNacimiento" name="fechaNacimiento"
-                           placeholder="Fecha nacimiento" required="required"
+                           placeholder="Fecha nacimiento"
                            th:field="*{paciente.fechaDeNacimiento}">
                 </div>
             </div>
@@ -62,71 +62,43 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="fecha" style="color: black;">Fecha cita</label>
-                    <input type="datetime-local" class="form-control" id="fecha" name="fecha"
-                           placeholder="Fecha consulta" required="required"
-                           th:field="*{citaInicio}"
-                           th:classappend="${#fields.hasErrors('citaInicio')} ? ' is-invalid'">
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('citaInicio')}"
-                         th:errors="*{citaInicio}">
-                    </div>
+                    <input type="datetime-local" disabled class="form-control" id="fecha" name="fecha"
+                           placeholder="Fecha consulta"
+                           th:field="*{citaInicio}">
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-group">
-                    <label for="addMinutes" style="color: black;">Duración</label>
-                    <select class="form-control"
+                    <label for="addMinutes"  style="color: black;">Duración</label>
+
+                    <select class="form-control" disabled
                             th:field="*{addMinutes}"
-                            id="addMinutes" name="addMinutes"
-                            th:classappend="${#fields.hasErrors('addMinutes*')} ? ' is-invalid'">
+                            id="addMinutes" name="addMinutes">
                         <option value="15">15</option>
                         <option value="30">30</option>
                         <option value="60">60</option>
                     </select>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('addMinutes*')}"
-                         th:errors="*{addMinutes.*}">
-                    </div>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-group">
-                    <select class="form-select form-select-lg mt-3"
-                            th:field="*{especialidad.especialidadId}"
-                            th:classappend="${#fields.hasErrors('especialidad*')} ? ' is-invalid'"
-                            onchange="document.getElementById('especialidadChanged').value='true'; this.form.submit()">
-                        <option value="">Seleccione especialidad</option>
-                        <option th:each="esp :${especialidades}"
-                                th:value="${esp.especialidadId}"
-                                th:text="${esp.nombreEspecialidad}"
-                                th:selected="${esp.especialidadId == citaRequest.especialidad.especialidadId}">
-                        </option>
-                    </select>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('especialidad*')}"
-                         th:errors="*{especialidad.*}">
-                    </div>
+                    <label for="doctor" style="color: black;">Doctor</label>
+                    <input type="text" disabled class="form-control" id="doctor" name="doctor"
+                           th:field="*{doctor.nombreCompleto}">
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-group">
-                    <select class="form-select form-select-lg mt-3"
-                            th:field="*{doctor.doctorId}"
-                            th:classappend="${#fields.hasErrors('doctor*')} ? ' is-invalid'">
-                        <option value="">Seleccione un doctor</option>
-                        <option th:each="doc :${doctores}"
-                                th:value="${doc.doctorId}"
-                                th:text="${doc.nombreCompleto}"
-                        th:selected="${doc.doctorId == citaRequest.doctor.doctorId}">
-                        </option>
-                    </select>
-                    <div class="invalid-feedback" th:if="${#fields.hasErrors('doctor*')}"
-                         th:errors="*{doctor.*}">
-                    </div>
+                    <label for="especialidad" style="color: black;">Especialidad</label>
+                    <input type="text" disabled class="form-control" id="especialidad" name="especialidad"
+                           th:field="*{especialidad.nombreEspecialidad}">
                 </div>
             </div>
 
         </div>
         <div class="col-md-3">
             <br/>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-primary">Eliminar</button>
             <a th:href="@{/pacientes/detalle-paciente/{pacienteId}(pacienteId=${citaRequest.paciente.pacienteId})}"
                class="btn btn-info">Regresar</a>
         </div>
