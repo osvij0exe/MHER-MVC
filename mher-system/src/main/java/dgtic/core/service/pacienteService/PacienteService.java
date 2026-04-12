@@ -1,11 +1,9 @@
 package dgtic.core.service.pacienteService;
 
 import dgtic.core.model.Entities.Paciente;
-import dgtic.core.model.dto.Mappers.CitasMapper;
 import dgtic.core.model.dto.Mappers.PacienteCitasMapper;
 import dgtic.core.model.dto.Mappers.PacienteMapper;
 import dgtic.core.model.dto.Request.PacienteRequest;
-import dgtic.core.model.dto.Response.CitasResponse;
 import dgtic.core.model.dto.Response.PacienteCitasResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import dgtic.core.repository.pacientes.IPacienteRepository;
@@ -74,10 +72,22 @@ public class PacienteService implements IPacienteService{
 
     @Override
     public PacienteCitasResponse findPacienteCitasById(Integer id) {
-        Paciente paciente = pacienteRepository.FindPacienteWithCitas(id);
+        Paciente paciente = pacienteRepository.findPacienteWithCitas(id);
 
         return PacienteCitasMapper.ToDto(paciente);
 
+    }
+
+    @Override
+    public PacienteCitasResponse findPacienteRecetasById(Integer id) {
+
+
+        return null;
+    }
+
+    @Override
+    public PacienteCitasResponse findPacienteHistoriasClinicasId(Integer id) {
+        return null;
     }
 
 

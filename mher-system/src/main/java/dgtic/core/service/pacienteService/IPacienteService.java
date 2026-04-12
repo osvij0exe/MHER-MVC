@@ -17,4 +17,6 @@ public interface IPacienteService {
     void deleteById(Integer id);
     Page<PacienteResponse> findByPage(Pageable pageable, @Param("search")String search);
     PacienteCitasResponse findPacienteCitasById(Integer id);
+    PacienteCitasResponse findPacienteRecetasById(Integer id);
+    PacienteCitasResponse findPacienteHistoriasClinicasId(Integer id);
 }
