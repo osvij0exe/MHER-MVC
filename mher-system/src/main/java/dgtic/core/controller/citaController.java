@@ -1,11 +1,7 @@
 package dgtic.core.controller;
 
-import dgtic.core.model.Entities.Cita;
-import dgtic.core.model.Entities.Especialidad;
-import dgtic.core.model.Entities.Paciente;
 import dgtic.core.model.dto.Request.CitasRequest;
 import dgtic.core.model.dto.Response.CitasResponse;
-import dgtic.core.model.dto.Response.DoctorResponse;
 import dgtic.core.model.dto.Response.EspecialidadResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import dgtic.core.service.citaServices.CitaService;
@@ -27,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("citas")
-public class CitaController {
+public class citaController {
 
     @Autowired
     CitaService citaService;

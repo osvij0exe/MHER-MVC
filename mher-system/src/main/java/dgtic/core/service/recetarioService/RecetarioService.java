@@ -43,4 +43,10 @@ public class RecetarioService implements IRecetarioService{
 
         return RecetaMapper.ToDto(updatedRecetario);
     }
+
+    @Override
+    public RecetaResponse findByPacienteIdAndRecetaId(Integer pacienteId, Integer recetaId) {
+        Recetario receta = recetarioRepository.findByPacienteIdAndRecetarioId(pacienteId, recetaId);
+        return  RecetaMapper.ToDto(receta);
+    }
 }

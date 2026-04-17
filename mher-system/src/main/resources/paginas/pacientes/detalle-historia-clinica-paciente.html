@@ -60,43 +60,41 @@
                class="btn btn-success">Editar Paciente<i class="bi bi-pencil" aria-hidden="true"></i> </a>
             <a th:href="@{/citas/agregar-cita/{id}(id=${paciente.pacienteId})}"
                class="btn btn-info">Agendar Cita<i class="bi bi-pencil" aria-hidden="true"></i> </a>
-            <a th:href="@{/pacientes/detalle-historia-clinica-paciente/{id}(id=${paciente.pacienteId})}"
-                class="btn btn-secondary">Historias clinicas<i class="bi bi-pencil" aria-hidden="true"></i> </a>
+            <a th:href="@{/pacientes/detalle-paciente/{id}(id=${paciente.pacienteId})}"
+               class="btn btn-secondary">Consultas<i class="bi bi-pencil" aria-hidden="true"></i> </a>
             <a th:href="@{/pacientes/detalle-recetas-paciente/{id}(id=${paciente.pacienteId})}"
                class="btn btn-secondary">Recetas<i class="bi bi-pencil" aria-hidden="true"></i> </a>
         </div>
     </form>
 
 
-    <table th:if="${paciente.citas != null and !paciente.citas.isEmpty()}" class="table table-striped table-hover table-sm mt-4">
+    <table th:if="${paciente.historiasClinicas != null and !paciente.historiasClinicas.isEmpty()}" class="table table-striped table-hover table-sm mt-4">
 
         <thead class="table-dark table-bordered">
         <tr>
-            <th scope="col"> Nombre Médico</th>
-            <th scope="col"> Apellido Médico</th>
-            <th scope="col"> Especialidad</th>
-            <th scope="col"> Fecha Consultas</th>
-            <th scope="col"> Estado cita</th>
+            <th scope="col"> Motivo de la consulta</th>
+            <th scope="col"> descripción enfermedad</th>
+            <th scope="col"> Nombre doctor que atendio</th>
+            <th scope="col"> Apellido doctor que atendio</th>
             <th scope="col"> Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cit: ${paciente.citas}">
-            <td th:text="${cit.doctor.nombre}"></td>
-            <td th:text="${cit.doctor.apellidos}"></td>
-            <td th:text="${cit.doctor.especialidad.nombreEspecialidad}"></td>
-            <td th:text="${cit.citaInicio}"></td>
-            <td th:text="${cit.citaEstado}"></td>
-            <td>
-                <a th:href="@{/citas/modificar-cita/paciente/{pacienteId}/cita/{citaId}
-                    (pacienteId=${pacienteId}, citaId=${cit.citaId})}"
-                   class="btn btn-success">Modificar <i class="bi bi-pencil"
-                                                        aria-hidden="true"></i> </a>
-                <a th:href="@{/citas/eliminar-cita/paciente/{pacienteId}/cita/{citaId}
-                 (pacienteId=${pacienteId}, citaId=${cit.citaId})}"
-                   class="btn btn-danger"><i class="bi bi-trash-fill"
-                                             aria-hidden="true"></i>Eliminar </a>
-            </td>
+        <tr th:each="hist: ${paciente.historiasClinicas}">
+            <td th:text="${hist.motivoDeLaConsulta}"></td>
+            <td th:text="${hist.descripcionEnfermedad}"></td>
+            <td th:text="${hist.doctor.nombre}"></td>
+            <td th:text="${hist.doctor.apellidos}"></td>
+<!--            <td>-->
+<!--                <a th:href="@{/citas/modificar-cita/paciente/{pacienteId}/cita/{citaId}-->
+<!--                    (pacienteId=${pacienteId}, citaId=${cit.citaId})}"-->
+<!--                   class="btn btn-success">Modificar <i class="bi bi-pencil"-->
+<!--                                                        aria-hidden="true"></i> </a>-->
+<!--                <a th:href="@{/citas/eliminar-cita/paciente/{pacienteId}/cita/{citaId}-->
+<!--                 (pacienteId=${pacienteId}, citaId=${cit.citaId})}"-->
+<!--                   class="btn btn-danger"><i class="bi bi-trash-fill"-->
+<!--                                             aria-hidden="true"></i>Eliminar </a>-->
+<!--            </td>-->
         </tr>
         </tbody>
     </table>

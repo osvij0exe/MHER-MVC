@@ -1,10 +1,9 @@
 package dgtic.core.controller;
 
-import dgtic.core.model.dto.Mappers.PacienteMapper;
-import dgtic.core.model.dto.Request.CitasRequest;
 import dgtic.core.model.dto.Request.PacienteRequest;
-import dgtic.core.model.dto.Response.CitasResponse;
 import dgtic.core.model.dto.Response.PacienteCitasResponse;
+import dgtic.core.model.dto.Response.PacienteHistoriasClinicasResponse;
+import dgtic.core.model.dto.Response.PacienteRecetasResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import dgtic.core.service.pacienteService.PacienteService;
 import dgtic.core.util.RenderPagina;
@@ -17,13 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("pacientes")
-public class PacienteController {
+public class pacienteController {
 
     @Autowired
     PacienteService pacienteService;
@@ -53,7 +49,24 @@ public class PacienteController {
         return "pacientes/detalle-paciente";
     }
 
+    @GetMapping("detalle-historia-clinica-paciente/{pacienteId}")
+    public String DetalleHistoriaClinicaPaciente(@PathVariable("pacienteId")Integer pacienteId,Model model)
+    {
+        PacienteHistoriasClinicasResponse response = pacienteService.findPacienteHistoriasClinicasById(pacienteId);
+        model.addAttribute("paciente",response);
+        model.addAttribute("contenido","Historias clinicas del paciente");
+        return "pacientes/detalle-historia-clinica-paciente";
+    }
 
+    @GetMapping("detalle-recetas-paciente/{pacienteId}")
+    public String DetalleRecetasPaciente(@PathVariable("pacienteId")Integer pacienteId,Model model)
+    {
+        PacienteRecetasResponse response = pacienteService.findPacienteRecetasById(pacienteId);
+        model.addAttribute("paciente",response);
+        model.addAttribute("contenido","Recetas del paciente");
+        return  "pacientes/detalle-recetas-paciente";
+
+    }
 
 
     @GetMapping("agregar-paciente")

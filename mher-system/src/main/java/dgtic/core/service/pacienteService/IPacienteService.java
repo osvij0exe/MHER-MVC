@@ -2,6 +2,8 @@ package dgtic.core.service.pacienteService;
 
 import dgtic.core.model.dto.Request.PacienteRequest;
 import dgtic.core.model.dto.Response.PacienteCitasResponse;
+import dgtic.core.model.dto.Response.PacienteHistoriasClinicasResponse;
+import dgtic.core.model.dto.Response.PacienteRecetasResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,6 @@ public interface IPacienteService {
     void deleteById(Integer id);
     Page<PacienteResponse> findByPage(Pageable pageable, @Param("search")String search);
     PacienteCitasResponse findPacienteCitasById(Integer id);
-    PacienteCitasResponse findPacienteRecetasById(Integer id);
-    PacienteCitasResponse findPacienteHistoriasClinicasId(Integer id);
+    PacienteRecetasResponse findPacienteRecetasById(Integer id);
+    PacienteHistoriasClinicasResponse findPacienteHistoriasClinicasById(Integer id);
 }

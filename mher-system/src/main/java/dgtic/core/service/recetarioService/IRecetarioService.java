@@ -13,4 +13,5 @@ public interface IRecetarioService {
     RecetaResponse save(RecetaRequest request);
     void deleteById(Integer id);
     RecetaResponse update(RecetaRequest request);
+    RecetaResponse findByPacienteIdAndRecetaId(Integer pacienteId, Integer recetaId);
 }

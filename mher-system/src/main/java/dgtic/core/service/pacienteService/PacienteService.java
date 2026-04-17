@@ -2,9 +2,13 @@ package dgtic.core.service.pacienteService;
 
 import dgtic.core.model.Entities.Paciente;
 import dgtic.core.model.dto.Mappers.PacienteCitasMapper;
+import dgtic.core.model.dto.Mappers.PacienteHistoriasCliniasMapper;
 import dgtic.core.model.dto.Mappers.PacienteMapper;
+import dgtic.core.model.dto.Mappers.PacienteRecetasMapper;
 import dgtic.core.model.dto.Request.PacienteRequest;
 import dgtic.core.model.dto.Response.PacienteCitasResponse;
+import dgtic.core.model.dto.Response.PacienteHistoriasClinicasResponse;
+import dgtic.core.model.dto.Response.PacienteRecetasResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import dgtic.core.repository.pacientes.IPacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,15 +83,19 @@ public class PacienteService implements IPacienteService{
     }
 
     @Override
-    public PacienteCitasResponse findPacienteRecetasById(Integer id) {
+    public PacienteRecetasResponse findPacienteRecetasById(Integer id) {
 
+        Paciente paciente = pacienteRepository.findPacienteWithRecetas(id);
+        return PacienteRecetasMapper.ToDto(paciente);
 
-        return null;
     }
 
     @Override
-    public PacienteCitasResponse findPacienteHistoriasClinicasId(Integer id) {
-        return null;
+    public PacienteHistoriasClinicasResponse findPacienteHistoriasClinicasById(Integer id) {
+
+        Paciente paciente = pacienteRepository.findPacienteWithRecetas(id);
+        return PacienteHistoriasCliniasMapper.ToDto(paciente);
+
     }
 
 
