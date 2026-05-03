@@ -4,7 +4,7 @@ import dgtic.core.model.Entities.Recetario;
 import dgtic.core.model.dto.Mappers.RecetaMapper;
 import dgtic.core.model.dto.Request.RecetaRequest;
 import dgtic.core.model.dto.Response.RecetaResponse;
-import dgtic.core.repository.recetarios.IRecetarioRepository;
+import dgtic.core.auth.repository.recetarios.IRecetarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

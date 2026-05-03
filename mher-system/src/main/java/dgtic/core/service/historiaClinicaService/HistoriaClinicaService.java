@@ -4,8 +4,7 @@ import dgtic.core.model.Entities.HistoriaClinica;
 import dgtic.core.model.dto.Mappers.HistoriaClinicaMapper;
 import dgtic.core.model.dto.Request.HistoriaClinicaRequest;
 import dgtic.core.model.dto.Response.HistoriaClinicaResponse;
-import dgtic.core.repository.historiasClinicas.IHistoriaClinicaRepository;
-import jdk.jfr.consumer.RecordedThread;
+import dgtic.core.auth.repository.historiasClinicas.IHistoriaClinicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

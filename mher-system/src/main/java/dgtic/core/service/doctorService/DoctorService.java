@@ -3,7 +3,7 @@ package dgtic.core.service.doctorService;
 import dgtic.core.model.dto.Request.DoctorRequest;
 import dgtic.core.model.dto.Response.DoctorNameResponse;
 import dgtic.core.model.dto.Response.DoctorResponse;
-import dgtic.core.repository.doctores.IDoctorRepository;
+import dgtic.core.auth.repository.doctores.IDoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

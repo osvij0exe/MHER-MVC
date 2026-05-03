@@ -1,12 +1,14 @@
 package dgtic.core.model.dto.Mappers;
 
 import dgtic.core.model.Entities.Doctor;
+import dgtic.core.model.Entities.Especialidad;
 import dgtic.core.model.Entities.Paciente;
 import dgtic.core.model.Entities.Recetario;
 import dgtic.core.model.dto.Request.RecetaRequest;
 import dgtic.core.model.dto.Response.DoctorResponse;
 import dgtic.core.model.dto.Response.RecetaResponse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class RecetaMapper {
@@ -16,16 +18,19 @@ public class RecetaMapper {
         if(request == null) return null;
 
         Recetario recetario = new Recetario();
-        recetario.setFechaEmision(request.getFechaEmision());
+        recetario.setFechaEmision(LocalDate.now());
         recetario.setIndicacionMedica(request.getIndicacionMedica());
         recetario.setViaDeAdministracion(request.getViaDeAdministracion());
         recetario.setDuracionDelTratamiento(request.getDuracionDelTratamiento());
 
         Doctor doctor = new Doctor();
-        doctor.setId(request.getDoctorId());
+        doctor.setId(request.getDoctor().getDoctorId());
+        Especialidad especialidad = new Especialidad();
+        especialidad.setId(request.getEspecialidad().getEspecialidadId());
+        doctor.setEspecialidad(especialidad);
         recetario.setDoctor(doctor);
         Paciente paciente = new Paciente();
-        paciente.setId(request.getPacienteId());
+        paciente.setId(request.getPaciente().getPacienteId());
         recetario.setPaciente(paciente);
 
         return recetario;

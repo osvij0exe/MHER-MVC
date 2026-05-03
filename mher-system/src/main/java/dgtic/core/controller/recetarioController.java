@@ -12,9 +12,10 @@ import dgtic.core.service.recetarioService.RecetarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("recetario")
@@ -40,9 +41,49 @@ public class recetarioController {
         model.addAttribute("contenido","Agregar nueva Receta");
         return "recetario/agregar-receta";
 
+    }
+
+    @PostMapping("guardar-receta/paciente/{pacienteId}/receta/{recetaId}")
+    public String guardarReceta(
+            @PathVariable Integer pacienteId,
+            @PathVariable Integer recetaId,
+            @ModelAttribute("recetaRequest")RecetaRequest recetaRequest,
+            BindingResult bindingResult,
+            @RequestParam(value= "especialidadChanged",defaultValue = "false") boolean especialidadChanged,
+            Model model) {
+        model.addAttribute(("especialidades"), especialidadService.findAll());
+        recetaRequest.setPaciente(pacienteService.findById(pacienteId));
+
+        if (recetaRequest.getEspecialidad() != null &&
+                recetaRequest.getEspecialidad().getEspecialidadId() != null) {
+            model.addAttribute("doctores",
+                    doctorService.findDoctorByEspecialidad(
+                            recetaRequest.getEspecialidad().getEspecialidadId()
+                    ));
+            if (especialidadChanged) {
+                recetaRequest.setDoctor(null);
+                model.addAttribute("warning", "Selecciona un doctor");
+                return "recetario/agregar-receta";
+            }
+        } else{
+            model.addAttribute("doctores", List.of());
+            model.addAttribute("warning", "Seleciona una especialidad");
+            return "recetario/agregar-receta";
+        }
+
+        if (recetaRequest.getDoctor() == null ||
+                recetaRequest.getDoctor().getDoctorId() == null) {
+                model.addAttribute("warning", "Selecciona un doctor");
+                return "recetario/agregar-receta";
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("warning", "Corrige los errores del formulario");
+            return "recetario/agregar-receta";
+        }
+        recetarioService.save(recetaRequest);
+        return "redirect:/pacientes/detalle-recetas-paciente/" + pacienteId;
 
     }
 
-
-
 }
+

@@ -58,8 +58,11 @@
             <br/>
             <a th:href="@{/pacientes/modificar-paciente/{pacienteId} (pacienteId=${pacienteId})}"
                class="btn btn-success">Editar Paciente<i class="bi bi-pencil" aria-hidden="true"></i> </a>
-            <a th:href="@{/citas/agregar-cita/{id}(id=${paciente.pacienteId})}"
-               class="btn btn-info">Agendar Cita<i class="bi bi-pencil" aria-hidden="true"></i> </a>
+            <a th:href="@{/recetario/agregar-receta/paciente/{pacienteId}/receta/{recetaId}
+               (pacienteId=${paciente.pacienteId}, recetaId=0)}"
+               class="btn btn-info">
+                Agregar Receta
+            </a>
             <a th:href="@{/pacientes/detalle-historia-clinica-paciente/{id}(id=${paciente.pacienteId})}"
                class="btn btn-secondary">Historias clinicas<i class="bi bi-pencil" aria-hidden="true"></i> </a>
             <a th:href="@{/pacientes/detalle-paciente/{id}(id=${paciente.pacienteId})}"

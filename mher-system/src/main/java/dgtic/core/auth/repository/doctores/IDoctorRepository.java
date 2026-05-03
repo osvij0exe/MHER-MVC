@@ -1,4 +1,4 @@
-package dgtic.core.repository.doctores;
+package dgtic.core.auth.repository.doctores;
 
 import dgtic.core.model.Entities.Doctor;
 import dgtic.core.model.dto.Request.DoctorRequest;

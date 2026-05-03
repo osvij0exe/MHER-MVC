@@ -1,4 +1,4 @@
-package dgtic.core.repository.pacientes;
+package dgtic.core.auth.repository.pacientes;
 
 import dgtic.core.model.Entities.Paciente;
 import dgtic.core.model.dto.Response.PacienteNameResposne;

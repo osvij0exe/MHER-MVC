@@ -1,5 +1,6 @@
 package dgtic.core.model.dto.Request;
 
+import dgtic.core.model.dto.Response.DoctorNameResponse;
 import dgtic.core.model.dto.Response.DoctorResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
 import lombok.*;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class RecetaRequest {
-    private LocalDate fechaEmision;
+//    private LocalDate fechaEmision;
 
     private String indicacionMedica;
 
@@ -20,7 +21,9 @@ public class RecetaRequest {
 
     private String duracionDelTratamiento;
 
-    public Integer doctorId;
+    public DoctorNameResponse doctor;
 
-    public Integer pacienteId;
+    public EspecialidadRequest especialidad;
+
+    public PacienteResponse paciente;
 }

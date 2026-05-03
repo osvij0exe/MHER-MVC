@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{plantillas/plantilla :: header}"></header>
+    <main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <h1 th:text="${contenido}"></h1>
+
+        <form th:action="@{/recetario/guardar-receta/paciente/{pacienteId}/receta/{recetaId}
+              (pacienteId=${recetaRequest.paciente.pacienteId}, recetaId=${recetaRequest.id})}"
+              th:object=${recetaRequest}
+              method="post">
+            <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
+            <input type="hidden" name="id" th:value="${id}" />
+            <input type="hidden" id="especialidadChanged" name="especialidadChanged" value="false">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="nombre" style="color: black;">Nombre Paciente</label>
+                        <input type="text" readonly class="form-control" id="nombre" name="nombre"
+                               placeholder="Nombre Paciente" required="required"
+                               th:field="*{paciente.nombre}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="apellido" style="color: black;">Apellido Paciente</label>
+                        <input type="text" readonly class="form-control" id="apellido" name="apellido"
+                               placeholder="Apellido Paciente" required="required"
+                               th:field="*{paciente.apellidos}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="fechaNacimiento" style="color: black;">Fecha nacimiento</label>
+                        <input type="date" readonly class="form-control" id="fechaNacimiento" name="fechaNacimiento"
+                               placeholder="Fecha nacimiento" required="required"
+                               th:field="*{paciente.fechaDeNacimiento}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="genero" style="color: black;">Genero</label>
+                        <select class="form-control" readonly th:field="*{paciente.genero}" id="genero" name="genero" required>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="numeroDeSeguridad" style="color: black;">Número de Seguridad</label>
+                        <input type="text" readonly class="form-control" id="numeroDeSeguridad" name="numeroDeSeguridad"
+                               placeholder="Numero de Seguridad" required="required"
+                               th:field="*{paciente.numeroDeSeguridad}">
+                    </div>
+                </div>
+
+<!--                -->
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="indicacionMedica" style="color: black;">Indicación Médica</label>
+                        <input type="text" readonly class="form-control" id="indicacionMedica" name="indicacionMedica"
+                               placeholder="Indicaciones" required="required"
+                               th:field="*{indicacionMedica}">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="viaDeAdministracion" style="color: black;">Via de administración</label>
+                        <input type="text" readonly class="form-control" id="viaDeAdministracion" name="viaDeAdministracion"
+                               placeholder="via de administracion" required="required"
+                               th:field="*{viaDeAdministracion}">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="duracionDelTratamiento" style="color: black;">Duracion del tratamiento</label>
+                        <input type="text" readonly class="form-control" id="duracionDelTratamiento" name="duracionDelTratamiento"
+                               placeholder="duracion del tratamiento estimado" required="required"
+                               th:field="*{duracionDelTratamiento}">
+                    </div>
+                </div>
+
+<!--                                -->
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                    <select class="form-select form-select-lg mt-3"
+                            th:field="*{especialidad.especialidadId}"
+                            th:classappend="${#fields.hasErrors('especialidad*')} ? ' is-invalid'"
+                            onchange="this.form.submit()">
+                        <option value="">Seleccione especialidad</option>
+                        <option th:each="esp :${especialidades}"
+                                th:value="${esp.especialidadId}"
+                                th:text="${esp.nombreEspecialidad}">
+                        </option>
+                    </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('especialidad*')}"
+                             th:errors="*{especialidad.*}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <select class="form-select form-select-lg mt-3"
+                                th:field="*{doctor.doctorId}"
+                                th:classappend="${#fields.hasErrors('doctor*')} ? ' is-invalid'">
+                            <option value="">Seleccione un doctor</option>
+                            <option th:each="doc :${doctores}"
+                                    th:value="${doc.doctorId}"
+                                    th:text="${doc.nombreCompleto}">
+                            </option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('doctor*')}"
+                             th:errors="*{doctor.*}">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3 mr-3">
+                <br/>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a th:href="@{/pacientes/detalle-paciente/{pacienteId}(pacienteId=${citaRequest.paciente.pacienteId})}"
+                        class="btn btn-info">Regresar</a>
+            </div>
+        </form>
+
+    </main>
+    <footer th:replace="~{plantillas/plantilla::footer}"></footer>
+</body>
+</html>

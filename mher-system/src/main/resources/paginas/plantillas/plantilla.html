@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/pacientes/lista-pacientes}">Pacientes</a>
+                        <a sec:authorize="hasAnyAuthority('USER', 'ADMIN')"  class="nav-link active" aria-current="page" th:href="@{/pacientes/lista-pacientes}">Pacientes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/views/doctores}">Doctores</a>
@@ -31,29 +31,45 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/views/especialidades}">Especialidades</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @Utilerias
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/utilerias/ver-subir-archivo}">Subir archivo</a></li>
-                            <li><a class="dropdown-item" th:href="@{/utilerias/crear-pdf(format=pdf)}" target="_blank">Crear Pdf</a></li>
-                            <li><a class="dropdown-item" th:href="@{/utilerias/mandar-correo}" target="_blank">Mandar Correo</a></li>
-                            <li><a class="dropdown-item" th:href="@{/utilerias/mostrar-archivos}" target="_blank">Bajar Archivos</a></li>
-                            <li><a class="dropdown-item" th:href="@{/utilerias/ver-drop?version=1}">Dropdown Anidado</a></li>
-                            <li><a class="dropdown-item" th:href="@{/utilerias/ver-drop?version=2}">Dropdown Anidado2</a></li>
-                        </ul>
-                    </li>
 
 
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    <!-- Login -->
+                    <li sec:authorize="!isAuthenticated()" class="nav-item">
+                        <a class="nav-link active" th:href="@{/security/login}">
+                            Login
+                        </a>
+                    </li>
+
+                    <!-- Register -->
+
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a class="nav-link active" th:href="@{/security/register}">
+                            Register
+                        </a>
+                    </li>
+
+                    <!-- Logout -->
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <form th:action="@{/doLogout}" method="post" class="m-0 p-0">
+
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}"/>
+
+                            <button type="submit"
+                                    class="nav-link btn btn-link text-white text-decoration-none">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+
+                </ul>
             </div>
         </div>
     </nav>

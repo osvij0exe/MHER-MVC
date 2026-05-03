@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        lang="es">
+<head th:replace="~{plantillas/plantilla :: head}"></head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+<main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 th:text="${contenido}"></h1>
+    <section class="mt-4">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img th:src="@{/image/medicina.jpg}" height="500" width="500" style="border-radius:10%"
+                         class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Password o usario incorrecto</div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-success">You have been logged out.</div>
+                    </div>
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/security/login}">
+                        <input
+                                type="hidden"
+                                th:name="${_csrf.parameterName}"
+                                th:value="${_csrf.token}">
+                        <!-- User input -->
+                        <div  class="form-outline mb-4">
+                            <h3>Login</h3>
+                        </div>
+                        <div  class="form-outline mb-4">
+                            <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                   placeholder="Enter a valid User Name" />
+                            <label class="form-label" for="email">User Name</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div  class="form-outline mb-3">
+                            <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                   placeholder="Enter password" />
+                            <label class="form-label" for="password">Password</label>
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{plantillas/plantilla::footer}"></footer>
+</body>
+</html>

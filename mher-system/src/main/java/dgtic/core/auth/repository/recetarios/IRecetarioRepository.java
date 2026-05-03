@@ -1,4 +1,4 @@
-package dgtic.core.repository.recetarios;
+package dgtic.core.auth.repository.recetarios;
 
 import dgtic.core.model.Entities.Recetario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +11,7 @@ public interface IRecetarioRepository extends JpaRepository<Recetario,Integer> {
             SELECT r
             FROM Recetario r
             LEFT JOIN FETCH r.paciente p
-            LEFT JOIN FETCH r.docto d
+            LEFT JOIN FETCH r.doctor d
             WHERE p.id = :pacienteId
             AND r.id = :recetaId
             """)

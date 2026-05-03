@@ -1,4 +1,4 @@
-package dgtic.core.repository.historiasClinicas;
+package dgtic.core.auth.repository.historiasClinicas;
 
 import dgtic.core.model.Entities.HistoriaClinica;
 import org.springframework.data.jpa.repository.JpaRepository;

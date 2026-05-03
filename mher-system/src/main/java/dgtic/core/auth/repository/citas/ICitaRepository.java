@@ -1,4 +1,4 @@
-package dgtic.core.repository.citas;
+package dgtic.core.auth.repository.citas;
 
 import dgtic.core.model.Entities.Cita;
 
@@ -63,4 +63,6 @@ public interface ICitaRepository extends JpaRepository<Cita,Integer> {
             WHERE c.id = :id
             """)
     Cita findByIdWithDoctorAndEspecialidad(Integer id);
+
+
 }

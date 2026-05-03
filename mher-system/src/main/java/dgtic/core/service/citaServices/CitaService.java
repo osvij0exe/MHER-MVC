@@ -6,7 +6,7 @@ import dgtic.core.model.Entities.Especialidad;
 import dgtic.core.model.dto.Mappers.CitasMapper;
 import dgtic.core.model.dto.Request.CitasRequest;
 import dgtic.core.model.dto.Response.CitasResponse;
-import dgtic.core.repository.citas.ICitaRepository;
+import dgtic.core.auth.repository.citas.ICitaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
