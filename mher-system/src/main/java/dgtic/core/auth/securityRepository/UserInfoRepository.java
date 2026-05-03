@@ -1,4 +1,4 @@
-package dgtic.core.auth.repository;
+package dgtic.core.auth.securityRepository;
 
 import dgtic.core.auth.model.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;

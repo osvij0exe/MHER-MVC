@@ -1,10 +1,9 @@
-package dgtic.core.auth.repository;
+package dgtic.core.auth.securityRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import dgtic.core.auth.model.UserInfo;
 import dgtic.core.auth.model.UserInfoRole;
-import dgtic.core.auth.repository.UserInfoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

@@ -10,7 +10,7 @@ import dgtic.core.model.dto.Response.PacienteCitasResponse;
 import dgtic.core.model.dto.Response.PacienteHistoriasClinicasResponse;
 import dgtic.core.model.dto.Response.PacienteRecetasResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
-import dgtic.core.auth.repository.pacientes.IPacienteRepository;
+import dgtic.core.repository.pacientes.IPacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

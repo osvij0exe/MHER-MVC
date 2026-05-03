@@ -1,6 +1,8 @@
 package dgtic.core.service.doctorService;
 
 import dgtic.core.model.dto.Request.DoctorRequest;
+import dgtic.core.model.dto.Response.CitasPacienteResponse;
+import dgtic.core.model.dto.Response.CitasResponse;
 import dgtic.core.model.dto.Response.DoctorNameResponse;
 import dgtic.core.model.dto.Response.DoctorResponse;
 import org.springframework.data.domain.Page;
@@ -15,4 +17,5 @@ public interface IDoctorService {
     void deleteById(Integer id);
     Page<DoctorService> findByPage(Pageable pageable);
     List<DoctorNameResponse> findDoctorByEspecialidad(Integer id);
+    List<CitasResponse> findDoctorsPatientsByDoctorId(Integer doctorId);
 }

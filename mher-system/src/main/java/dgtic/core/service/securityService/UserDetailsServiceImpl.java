@@ -1,7 +1,7 @@
 package dgtic.core.service.securityService;
 
 import dgtic.core.auth.model.UserInfo;
-import dgtic.core.auth.repository.UserInfoRepository;
+import dgtic.core.auth.securityRepository.UserInfoRepository;
 import dgtic.core.model.Entities.UserDetailsImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

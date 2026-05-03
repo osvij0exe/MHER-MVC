@@ -1,4 +1,4 @@
-package dgtic.core.auth.repository.especialidades;
+package dgtic.core.repository.especialidades;
 
 import dgtic.core.model.Entities.Especialidad;
 import org.springframework.data.jpa.repository.JpaRepository;

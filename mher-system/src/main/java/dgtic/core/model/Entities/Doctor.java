@@ -1,5 +1,6 @@
 package dgtic.core.model.Entities;
 
+import dgtic.core.auth.model.UserInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,6 +32,12 @@ public class Doctor {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ESPECIALIDAD_ID")
     public Especialidad especialidad;
+
+
+//    @OneToOne
+//    @JoinColumn(name="use_id")
+//    private UserInfo user;
+
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Cita> citas;

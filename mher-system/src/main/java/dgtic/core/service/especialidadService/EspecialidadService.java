@@ -3,7 +3,7 @@ package dgtic.core.service.especialidadService;
 import dgtic.core.model.Entities.Especialidad;
 import dgtic.core.model.dto.Mappers.EspecialidadMapper;
 import dgtic.core.model.dto.Response.EspecialidadResponse;
-import dgtic.core.auth.repository.especialidades.IEspecialidadRepository;
+import dgtic.core.repository.especialidades.IEspecialidadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

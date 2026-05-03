@@ -6,7 +6,7 @@ import dgtic.core.auth.dto.mappers.UserInfoDTOMapper;
 import dgtic.core.auth.exception.UserInfoNotFoundException;
 import dgtic.core.auth.model.UserInfo;
 import dgtic.core.auth.model.UserInfoRole;
-import dgtic.core.auth.repository.UserInfoRepository;
+import dgtic.core.auth.securityRepository.UserInfoRepository;
 import dgtic.core.auth.service.IUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

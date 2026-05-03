@@ -1,4 +1,4 @@
-package dgtic.core.auth.repository.citas;
+package dgtic.core.repository.citas;
 
 import dgtic.core.model.Entities.Cita;
 

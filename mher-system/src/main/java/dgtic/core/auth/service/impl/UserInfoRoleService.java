@@ -1,18 +1,16 @@
 package dgtic.core.auth.service.impl;
 
 import dgtic.core.auth.dto.UserInfoRoleDTO;
-import dgtic.core.auth.dto.mappers.UserInfoDTOMapper;
 import dgtic.core.auth.dto.mappers.UserInfoRoleDTOMapper;
 import dgtic.core.auth.exception.UserInfoRoleNotFoundException;
 import dgtic.core.auth.model.UserInfoRole;
-import dgtic.core.auth.repository.UserInfoRoleRepository;
+import dgtic.core.auth.securityRepository.UserInfoRoleRepository;
 import dgtic.core.auth.service.IUserInfoRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
