@@ -1,14 +1,11 @@
 package dgtic.core.service.doctorService;
 
 import dgtic.core.model.Entities.Cita;
-import dgtic.core.model.Entities.Paciente;
+import dgtic.core.model.Entities.Doctor;
 import dgtic.core.model.dto.Mappers.CitasMapper;
-import dgtic.core.model.dto.Mappers.CitasPacienteMapper;
+import dgtic.core.model.dto.Mappers.DoctorMapper;
 import dgtic.core.model.dto.Request.DoctorRequest;
-import dgtic.core.model.dto.Response.CitasPacienteResponse;
-import dgtic.core.model.dto.Response.CitasResponse;
-import dgtic.core.model.dto.Response.DoctorNameResponse;
-import dgtic.core.model.dto.Response.DoctorResponse;
+import dgtic.core.model.dto.Response.*;
 import dgtic.core.repository.doctores.IDoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,5 +60,19 @@ public class DoctorService implements IDoctorService{
 
         return CitasMapper.ToDtoCollection(citas);
 
+    }
+
+    @Override
+    public DoctorUserResponse findByDoctorUserEmail(String email) {
+        Doctor doctor = doctorRepository.findByDoctorUserEmail(email);
+        return DoctorMapper.ToDoctorsUserDto(doctor);
+    }
+
+    @Override
+    public List<CitasResponse> findDoctorsPatientsByDoctorId(Integer doctorId, String email) {
+        List<Cita> citas = doctorRepository.findDoctorsPatientsByDoctorId(doctorId,email);
+
+
+        return CitasMapper.ToDtoCollection(citas);
     }
 }

@@ -66,6 +66,35 @@ public class CitasMapper {
             return response;
     }
 
+    public static DoctorPacinetesCitasResponse ToDoctorsPacienteCitasDto(Cita cita)
+    {
+        DoctorPacinetesCitasResponse response = new DoctorPacinetesCitasResponse();
+
+        response.setCitaId(cita.getId());
+        response.setCitaEstado(cita.getCitaEstado());
+        response.setCitaInicio(cita.getCitaInicio());
+        response.setCitaFin(cita.getCitaFin());
+        Long duration = CitasResponse.getDuration(cita.getCitaInicio(), cita.getCitaFin());
+        response.setAddMinutes(duration);
+        response.setCitaEstado(cita.getCitaEstado());
+        if (cita.getDoctor() != null && cita.getDoctor().getEspecialidad() != null) {
+            DoctorUserResponse doctorResponse = DoctorMapper.ToDoctorsUserDto(cita.getDoctor());
+            response.setDoctor(doctorResponse);
+        }
+        if (cita.getPaciente() != null) {
+            PacienteResponse pacienteResponse = PacienteMapper.ToDto(cita.getPaciente());
+            response.setPaciente(pacienteResponse);
+        }
+        if (cita.getDoctor() != null && cita.getDoctor().getEspecialidad() != null) {
+            DoctorUserResponse doctorResponse = DoctorMapper.ToDoctorsUserDto(cita.getDoctor());
+            response.setDoctor(doctorResponse);
+
+            EspecialidadResponse especialidadResponse = EspecialidadMapper.ToDto(cita.getDoctor().getEspecialidad());
+            response.setEspecialidad(especialidadResponse);
+        }
+        return response;
+    }
+
     public static List<CitasResponse> ToDtoCollection(List<Cita> citas)
     {
 

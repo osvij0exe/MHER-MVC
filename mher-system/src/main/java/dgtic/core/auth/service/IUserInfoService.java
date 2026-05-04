@@ -2,8 +2,11 @@ package dgtic.core.auth.service;
 
 
 
+import dgtic.core.auth.dto.DoctorUserRegister;
 import dgtic.core.auth.dto.UserInfoDTO;
 import dgtic.core.auth.exception.UserInfoNotFoundException;
+import dgtic.core.model.dto.Response.DoctorResponse;
+import dgtic.core.model.dto.Response.DoctorUserResponse;
 
 import java.util.List;
 

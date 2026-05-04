@@ -16,6 +16,6 @@ public class DoctorRequest {
     private char genero;
     private boolean active;
     private String cedulaProfesional;
-    private int especialidadId;
+    private Integer especialidadId;
 
 }

@@ -7,6 +7,7 @@ import dgtic.core.model.Entities.Especialidad;
 import dgtic.core.model.dto.Request.DoctorRequest;
 import dgtic.core.model.dto.Response.DoctorNameResponse;
 import dgtic.core.model.dto.Response.DoctorResponse;
+import dgtic.core.model.dto.Response.DoctorUserResponse;
 import dgtic.core.model.dto.Response.EspecialidadResponse;
 import org.springframework.stereotype.Component;
 
@@ -53,6 +54,17 @@ public class DoctorMapper {
         response.setNombreCompleto(doctores.getNombre()+" "+doctores.getApellidos());
         return response;
     }
+
+    public static DoctorUserResponse ToDoctorsUserDto(Doctor doctor)
+    {
+        DoctorUserResponse response = new DoctorUserResponse();
+        response.setDoctorId(doctor.getId());
+        response.setNombreCompleto(doctor.getNombre()+" "+doctor.getApellidos());
+        response.setUserId(doctor.getUser().getUseId());
+        response.setEmail(doctor.getUser().getUseEmail());
+        return response;
+    }
+
 
     public static List<DoctorResponse> ToDtoCollection(List<Doctor> doctores)
     {

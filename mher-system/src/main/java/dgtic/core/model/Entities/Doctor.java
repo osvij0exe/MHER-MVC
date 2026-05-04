@@ -34,9 +34,9 @@ public class Doctor {
     public Especialidad especialidad;
 
 
-//    @OneToOne
-//    @JoinColumn(name="use_id")
-//    private UserInfo user;
+    @OneToOne
+    @JoinColumn(name="use_id")
+    private UserInfo user;
 
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

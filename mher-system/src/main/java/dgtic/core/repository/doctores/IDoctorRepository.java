@@ -2,9 +2,7 @@ package dgtic.core.repository.doctores;
 
 import dgtic.core.model.Entities.Cita;
 import dgtic.core.model.Entities.Doctor;
-import dgtic.core.model.dto.Request.DoctorRequest;
 import dgtic.core.model.dto.Response.DoctorNameResponse;
-import dgtic.core.model.dto.Response.DoctorResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,21 +19,30 @@ public interface IDoctorRepository extends JpaRepository<Doctor,Integer> {
             """)
     public List<DoctorNameResponse> findDoctorByEspecialidad(@Param("especialidadId")Integer especialidadId);
 
-//    @Query("""
-//            SELECT c FROM Cita c
-//            JOIN FETCH c.paciente p
-//            JOIN FETCH d.doctor d
-//            WHERE c.id = :doctorId
-//            AND d.user.useId = :userId
-//            """)
-//    public List<Cita> findDoctorsPatientsByDoctorId(Integer doctorId, Long userId);
+    @Query("""
+    SELECT c FROM Cita c
+    JOIN FETCH c.paciente p
+    JOIN FETCH c.doctor d
+    JOIN FETCH d.user u
+    WHERE d.id = :doctorId
+    AND u.useEmail = :email
+    """)
+    List<Cita> findDoctorsPatientsByDoctorId(
+            @Param("doctorId") Integer doctorId,
+            @Param("email") String email
+    );
 
     @Query("""
             SELECT c FROM Cita c
             JOIN FETCH c.paciente p
             WHERE c.doctor.id = :doctorId
             """)
-    public List<Cita> findDoctorsPatientsByDoctorId(Integer doctorId);
+    public List<Cita> findDoctorsPatientsByDoctorId(@Param("doctorId")Integer doctorId);
 
-
+    @Query("""
+            SELECT d FROM Doctor d
+            JOIN FETCH d.user u
+            WHERE u.useEmail = :email
+            """)
+    public Doctor findByDoctorUserEmail(@Param("email")String email);
 }

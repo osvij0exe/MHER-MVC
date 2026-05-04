@@ -108,4 +108,35 @@ class UserInfoRepositoryTest {
             System.out.println("User updated with roles");
         }
     }
+    @Test
+    public void testCreateUser3() {
+        UserInfo user = new UserInfo();
+        user.setUseFirstName("Jessica");
+        user.setUseLastName("Amdor");
+        user.setUseEmail("jessica@gmail.com");
+        user.setUsePasswd("jessica"); //user
+        user.setUseIdStatus(1);
+        user.setUseCreatedBy(1L);
+        user.setUseModifiedBy(1L);
+        UserInfo savedUser = userInfoRepository.save(user);
+        UserInfo existUser = testEntityManager.find(UserInfo.class, savedUser.getUseId());
+        assertThat(user.getUseEmail()).isEqualTo(existUser.getUseEmail());
+    }
+    @Test
+    public void testRoleCreationUser3() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(11, new SecureRandom());
+        Set <UserInfoRole> roles = new HashSet<>();
+        UserInfoRole role = new UserInfoRole();
+        role.setUsrId(2L);
+        roles.add(role);
+        Optional<UserInfo> userInfo = userInfoRepository.findById(6L);
+        if (userInfo.isPresent()) {
+            UserInfo user = userInfo.get();
+            user.setUseInfoRoles(roles);
+            user.setUsePasswd(passwordEncoder.encode("jessica"));// admin
+            userInfoRepository.save(user);
+            System.out.println("User updated with roles");
+        }
+    }
+
 }

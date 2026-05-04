@@ -28,32 +28,67 @@
 
                         <!-- Campo Nombre -->
                         <div class="form-outline mb-4 text-start">
-                            <label class="form-label" for="useFirstName">Nombre</label>
-                            <input type="text" id="useFirstName" th:field="*{useFirstName}"
+                            <label class="form-label" for="nombre">Nombre</label>
+                            <input type="text" id="nombre" th:field="*{doctor.nombre}"
                                    class="form-control form-control-lg" placeholder="Nombre" />
-                            <p th:if="${#fields.hasErrors('useFirstName')}" th:errors="*{useFirstName}" class="text-danger small"></p>
+                            <p th:if="${#fields.hasErrors('doctor.nombre')}" th:errors="*{doctor.nombre}" class="text-danger small"></p>
                         </div>
                         <div class="form-outline mb-4 text-start">
-                            <label class="form-label" for="useLastName">Apellidos</label>
-                            <input type="text" id="useLastName" th:field="*{useLastName}"
+                            <label class="form-label" for="apellido">Apellidos</label>
+                            <input type="text" id="apellido" th:field="*{doctor.apellido}"
                                    class="form-control form-control-lg" placeholder="Appellidos" />
-                            <p th:if="${#fields.hasErrors('useLastName')}" th:errors="*{useLastName}" class="text-danger small"></p>
+                            <p th:if="${#fields.hasErrors('doctor.apellido')}" th:errors="*{doctor.apellido}" class="text-danger small"></p>
                         </div>
+
+                            <div class="form-outline mb-4 text-start">
+                                <label for="genero" style="color: black;">Genero</label>
+                                <select class="form-control"
+                                        th:field="*{doctor.genero}"
+                                        id="genero" name="genero"
+                                        th:classappend="${#fields.hasErrors('doctor.genero')} ? ' is-invalid'">
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('doctor.genero')}"
+                                     th:errors="*{doctor.genero}">
+                                </div>
+                            </div>
+                        <div class="form-outline mb-4 text-start">
+                            <label class="form-label" for="cedulaProfesional">Cedula Profesional</label>
+                            <input type="text" id="cedulaProfesional" th:field="*{doctor.cedulaProfesional}"
+                                   class="form-control form-control-lg" placeholder="cedulaProfesional" />
+                            <p th:if="${#fields.hasErrors('doctor.cedulaProfesional')}" th:errors="*{doctor.cedulaProfesional}" class="text-danger small"></p>
+                        </div>
+
+                        <div class="form-outline mb-4 text-start">
+                            <select class="form-select form-select-lg mt-3"
+                                    th:field="*{doctor.especialidadId}">
+
+                                <option value="">Seleccione especialidad</option>
+
+                                <option th:each="esp : ${especialidades}"
+                                        th:value="${esp.especialidadId}"
+                                        th:text="${esp.nombreEspecialidad}">
+                                </option>
+
+                            </select>
+                        </div>
+
 
                         <!-- Campo Email -->
                         <div class="form-outline mb-4 text-start">
                             <label class="form-label" for="useEmail">Correo Electrónico</label>
-                            <input type="email" id="useEmail" th:field="*{useEmail}"
+                            <input type="email" id="useEmail" th:field="*{user.useEmail}"
                                    class="form-control form-control-lg" placeholder="usuario@dominio.com" />
-                            <p th:if="${#fields.hasErrors('useEmail')}" th:errors="*{useEmail}" class="text-danger small"></p>
+                            <p th:if="${#fields.hasErrors('user.useEmail')}" th:errors="*{user.useEmail}" class="text-danger small"></p>
                         </div>
 
                         <!-- Campo Password -->
                         <div class="form-outline mb-3 text-start">
                             <label class="form-label" for="usePasswd">Contraseña</label>
-                            <input type="password" id="usePasswd" th:field="*{usePasswd}"
+                            <input type="password" id="usePasswd" th:field="*{user.usePasswd}"
                                    class="form-control form-control-lg" placeholder="password" />
-                            <p th:if="${#fields.hasErrors('usePasswd')}" th:errors="*{usePasswd}" class="text-danger small"></p>
+                            <p th:if="${#fields.hasErrors('user.usePasswd')}" th:errors="*{user.usePasswd}" class="text-danger small"></p>
                         </div>
 
                         <div class="form-outline mb-3">

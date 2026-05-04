@@ -1,9 +1,15 @@
 package dgtic.core.auth.dto.mappers;
 
+import dgtic.core.auth.dto.DoctorUserRegister;
 import dgtic.core.auth.dto.UserInfoDTO;
 import dgtic.core.auth.dto.UserInfoRoleDTO;
 import dgtic.core.auth.model.UserInfo;
 import dgtic.core.auth.model.UserInfoRole;
+import dgtic.core.model.Entities.Doctor;
+import dgtic.core.model.Entities.Especialidad;
+import dgtic.core.model.dto.Mappers.DoctorMapper;
+import dgtic.core.model.dto.Mappers.EspecialidadMapper;
+import dgtic.core.model.dto.Response.EspecialidadResponse;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +33,6 @@ public class UserInfoDTOMapper {
             userInfoRoles.add(UserInfoRoleDTOMapper.toDTO(role));
         }
         dto.setUseInfoRoles(userInfoRoles);
-        /*dto.setUseInfoRoles(userInfo.getUseInfoRoles()
-                .stream()
-                .map(userInfoRoleService::convertEntityToDTO)
-                .collect(Collectors.toSet()));*/
         return dto;
     }
 
@@ -51,10 +53,38 @@ public class UserInfoDTOMapper {
             userInfoRoles.add(UserInfoRoleDTOMapper.toEntity(role));
         }
         entity.setUseInfoRoles(userInfoRoles);
-        /*entity.setUseInfoRoles(userInfo.getUseInfoRoles()
-                .stream()
-                .map(userInfoRoleService::convertDTOtoEntity)
-                .collect(Collectors.toSet()));*/
         return entity;
+    }
+
+    public static Doctor ToDoctorUserEntity(DoctorUserRegister register)
+    {
+        Doctor doctor = new Doctor();
+
+        doctor.setNombre(register.getDoctor().getNombre());
+        doctor.setApellidos(register.getDoctor().getApellido());
+        doctor.setGenero(register.getDoctor().getGenero());
+        doctor.setCedulaProfesional(register.getDoctor().getCedulaProfesional());
+        doctor.setActive(true);
+
+        EspecialidadResponse especialidadResponse = new EspecialidadResponse();
+        especialidadResponse.setEspecialidadId(
+                register.getDoctor().getEspecialidadId()
+        );
+
+        Especialidad especialidad =
+                EspecialidadMapper.ToEntity(especialidadResponse);
+
+        doctor.setEspecialidad(especialidad);
+
+        register.getUser().setUseFirstName(doctor.getNombre());
+        register.getUser().setUseLastName(doctor.getApellidos());
+
+
+        UserInfo user =
+                UserInfoDTOMapper.toEntity(register.getUser());
+
+        doctor.setUser(user);
+
+        return doctor;
     }
 }
