@@ -98,6 +98,13 @@
 <!--                   class="btn btn-danger"><i class="bi bi-trash-fill"-->
 <!--                                             aria-hidden="true"></i>Eliminar </a>-->
 <!--            </td>-->
+            <td>
+                <a th:href="@{/recetario/{id}/pdf(id=${rec.id})}"
+                   class="btn btn-danger"
+                   target="_blank">
+                    Descargar PDF
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

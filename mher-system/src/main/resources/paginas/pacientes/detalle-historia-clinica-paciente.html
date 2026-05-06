@@ -95,6 +95,14 @@
 <!--                   class="btn btn-danger"><i class="bi bi-trash-fill"-->
 <!--                                             aria-hidden="true"></i>Eliminar </a>-->
 <!--            </td>-->
+
+            <td>
+                <a th:href="@{/historiaClinica/{id}/pdf(id=${hist.id})}"
+                   class="btn btn-danger"
+                   target="_blank">
+                    Descargar PDF
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

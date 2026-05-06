@@ -1,5 +1,6 @@
 package dgtic.core.controller;
 
+import dgtic.core.model.Entities.Recetario;
 import dgtic.core.model.dto.Request.RecetaRequest;
 import dgtic.core.model.dto.Response.DoctorResponse;
 import dgtic.core.model.dto.Response.PacienteRecetasResponse;
@@ -10,6 +11,7 @@ import dgtic.core.service.especialidadService.EspecialidadService;
 import dgtic.core.service.pacienteService.PacienteService;
 import dgtic.core.service.recetarioService.RecetarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,6 +84,27 @@ public class recetarioController {
         }
         recetarioService.save(recetaRequest);
         return "redirect:/pacientes/detalle-recetas-paciente/" + pacienteId;
+
+    }
+
+
+    @GetMapping("/{id}/pdf")
+    public ResponseEntity<byte[]> descargarPdf(@PathVariable Integer id)
+    {
+        Recetario receta = recetarioService.findById(id);
+
+        byte[] pdf = recetarioService.generatePdf(receta);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+
+        headers.setContentDisposition(
+                ContentDisposition.inline()
+                        .filename("receta-" + id + ".pdf")
+                        .build()
+        );
+
+        return  new ResponseEntity<>(pdf,headers, HttpStatus.OK);
 
     }
 
