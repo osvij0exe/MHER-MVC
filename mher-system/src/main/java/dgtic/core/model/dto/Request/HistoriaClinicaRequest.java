@@ -11,18 +11,19 @@ import lombok.*;
 @Builder
 public class HistoriaClinicaRequest {
 
-    public String motivoDeLaConsulta;
+    private String motivoDeLaConsulta;
 
-    public String descripcionEnfermedad;
+    private String descripcionEnfermedad;
 
-    public String antecedentesMedicos;
+    private String antecedentesMedicos;
 
-    public String diagnostico;
+    private String diagnostico;
 
-    public String tratamientoMedico;
+    private String tratamientoMedico;
 
-    public Integer doctorId;
+    private DoctorRequest doctor;
 
-    public Integer pacienteId;
+    private PacienteResponse paciente;
+
 
 }

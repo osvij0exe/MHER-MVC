@@ -7,10 +7,12 @@
     <main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <h1 th:text="${contenido}"></h1>
 
-        <form th:action="@{/recetario/guardar-receta/paciente/{pacienteId}(pacienteId=${receta.paciente.pacienteId})}"
-              th:object=${receta}
+        <form th:action="@{/recetario/modificar-receta/paciente/{pacienteId}/receta/{Id}
+                        (pacienteId=${receta.paciente.pacienteId}, Id=${receta.id})}"
+              th:object="${receta}"
               method="post">
             <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
+            <input type="hidden" name="id" th:value="${receta.id}" />
             <input type="hidden" id="especialidadChanged" name="especialidadChanged" value="false">
             <div class="row">
                 <div class="col-md-5">
@@ -77,13 +79,14 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="duracionDelTratamiento" style="color: black;">Duracion del tratamiento</label>
-                        <input type="text"  class="form-control" id="duracionDelTratamiento" name="duracionDelTratamiento"
+                        <input type="text" class="form-control" id="duracionDelTratamiento" name="duracionDelTratamiento"
                                placeholder="duracion del tratamiento estimado" required="required"
                                th:field="*{duracionDelTratamiento}">
                     </div>
                 </div>
 
 <!--                                -->
+
                 <div class="col-md-5">
                     <div class="form-group">
                     <select class="form-select form-select-lg mt-3"
@@ -119,11 +122,14 @@
                 </div>
 
             </div>
-            <div class="col-md-3 mr-3">
-                <br/>
+            <div class="mt-4 d-flex gap-2 justify-content-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a th:href="@{/pacientes/detalle-recetas-paciente/{pacienteId}(pacienteId=${paciente.pacienteId})}"
-                   class="btn btn-info">Regresar</a>
+
+                <a th:href="@{/pacientes/detalle-recetas-paciente/{pacienteId}
+        (pacienteId=${receta.paciente.pacienteId})}"
+                   class="btn btn-info">
+                    Regresar
+                </a>
             </div>
         </form>
 

@@ -1,11 +1,10 @@
 package dgtic.core.model.dto.Request;
 
 import dgtic.core.model.dto.Response.DoctorNameResponse;
-import dgtic.core.model.dto.Response.DoctorResponse;
 import dgtic.core.model.dto.Response.PacienteResponse;
+import jakarta.validation.Valid;
 import lombok.*;
 
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -13,7 +12,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class RecetaRequest {
-//    private LocalDate fechaEmision;
+
+    private Integer Id;
 
     private String indicacionMedica;
 
@@ -23,6 +23,7 @@ public class RecetaRequest {
 
     public DoctorNameResponse doctor;
 
+    @Valid
     public EspecialidadRequest especialidad;
 
     public PacienteResponse paciente;

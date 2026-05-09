@@ -31,6 +31,12 @@ public class RecetarioService implements IRecetarioService{
     }
 
     @Override
+    public RecetaResponse findRecetaById(Integer id) {
+        Recetario recetario = recetarioRepository.findById(id).orElse(null);
+        return RecetaMapper.ToDto(recetario);
+    }
+
+    @Override
     public RecetaResponse save(RecetaRequest request) {
         Recetario recetario = RecetaMapper.ToEntity(request);
 

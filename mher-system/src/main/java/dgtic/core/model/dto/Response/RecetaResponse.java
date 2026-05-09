@@ -1,8 +1,5 @@
 package dgtic.core.model.dto.Response;
 
-import dgtic.core.model.Entities.Doctor;
-import dgtic.core.model.Entities.Paciente;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -24,7 +21,11 @@ public class RecetaResponse {
 
     private String duracionDelTratamiento;
 
-    public DoctorResponse doctor;
+    public DoctorNameResponse doctor;
 
     public PacienteResponse paciente;
+
+    public  EspecialidadResponse especialidad;
+
+
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public interface IRecetarioService {
 
     Recetario findById(Integer id);
+    RecetaResponse findRecetaById(Integer id);
     RecetaResponse save(RecetaRequest request);
     void deleteById(Integer id);
     RecetaResponse update(RecetaRequest request);

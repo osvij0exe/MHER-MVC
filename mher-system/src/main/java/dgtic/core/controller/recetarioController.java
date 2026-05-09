@@ -2,10 +2,7 @@ package dgtic.core.controller;
 
 import dgtic.core.model.Entities.Recetario;
 import dgtic.core.model.dto.Request.RecetaRequest;
-import dgtic.core.model.dto.Response.DoctorResponse;
-import dgtic.core.model.dto.Response.PacienteRecetasResponse;
-import dgtic.core.model.dto.Response.PacienteResponse;
-import dgtic.core.model.dto.Response.RecetaResponse;
+import dgtic.core.model.dto.Response.*;
 import dgtic.core.service.doctorService.DoctorService;
 import dgtic.core.service.especialidadService.EspecialidadService;
 import dgtic.core.service.pacienteService.PacienteService;
@@ -35,25 +32,33 @@ public class recetarioController {
     @Autowired
     EspecialidadService especialidadService;
 
-    @GetMapping("agregar-receta/paciente/{pacienteId}/receta/{recetaId}")
-    public String recetaVista(@PathVariable("pacienteId")Integer pacienteId,@PathVariable("recetaId")Integer recetaId,Model model)
+    @GetMapping("agregar-receta/paciente/{pacienteId}")
+    public String recetaVista(@PathVariable("pacienteId")Integer pacienteId,Model model)
     {
-        RecetaResponse recetaResponse = recetarioService.findByPacienteIdAndRecetaId(pacienteId,recetaId);
-        model.addAttribute("receta",recetaResponse);
+        PacienteResponse paciente = pacienteService.findById(pacienteId);
+        RecetaRequest receta = new RecetaRequest();
+        receta.setPaciente(paciente);
+        List<EspecialidadResponse> especialidades = especialidadService.findAll();
+
         model.addAttribute("contenido","Agregar nueva Receta");
+
+        model.addAttribute("receta",receta);
+        model.addAttribute("especialidades",especialidades);
+        model.addAttribute("doctores",List.of());
+
         return "recetario/agregar-receta";
 
     }
 
-    @PostMapping("guardar-receta/paciente/{pacienteId}/receta/{recetaId}")
+    @PostMapping("guardar-receta/paciente/{pacienteId}")
     public String guardarReceta(
             @PathVariable Integer pacienteId,
-            @PathVariable Integer recetaId,
-            @ModelAttribute("recetaRequest")RecetaRequest recetaRequest,
+            @ModelAttribute("receta")RecetaRequest recetaRequest,
             BindingResult bindingResult,
             @RequestParam(value= "especialidadChanged",defaultValue = "false") boolean especialidadChanged,
             Model model) {
         model.addAttribute(("especialidades"), especialidadService.findAll());
+
         recetaRequest.setPaciente(pacienteService.findById(pacienteId));
 
         if (recetaRequest.getEspecialidad() != null &&
@@ -86,6 +91,78 @@ public class recetarioController {
         return "redirect:/pacientes/detalle-recetas-paciente/" + pacienteId;
 
     }
+
+    @GetMapping("modificar-receta/paciente/{pacienteId}/receta/{Id}")
+    public String modificarRecetaVista(@PathVariable("pacienteId")Integer pacienteId,
+                                       @PathVariable("Id")Integer recetaId
+                                       ,Model model) {
+        RecetaResponse receta = recetarioService.findRecetaById(recetaId);
+
+
+        model.addAttribute("contenido", "Modificar Receta");
+
+        model.addAttribute("receta",receta);
+        model.addAttribute("especialidades",especialidadService.findAll());
+
+        if(receta.getEspecialidad() != null
+         && receta.getEspecialidad().getEspecialidadId() != null)
+        {
+            model.addAttribute("doctores",
+                    doctorService.findDoctorByEspecialidad(
+                            receta.getEspecialidad().getEspecialidadId()
+                    ));
+        }else {
+            model.addAttribute("doctores", List.of());
+        }
+
+        return "recetario/modificar-receta";
+
+    }
+
+    @PostMapping("modificar-receta/paciente/{pacienteId}/receta/{Id}")
+    public String guardarModificacionReceta(
+            @PathVariable Integer pacienteId,
+            @PathVariable Integer Id,
+            @ModelAttribute("receta")RecetaRequest recetaRequest,
+            BindingResult bindingResult,
+            @RequestParam(value= "especialidadChanged",defaultValue = "false") boolean especialidadChanged,
+            Model model) {
+        model.addAttribute(("especialidades"), especialidadService.findAll());
+
+        recetaRequest.setPaciente(pacienteService.findById(pacienteId));
+
+        if (recetaRequest.getEspecialidad() != null &&
+                recetaRequest.getEspecialidad().getEspecialidadId() != null) {
+            model.addAttribute("doctores",
+                    doctorService.findDoctorByEspecialidad(
+                            recetaRequest.getEspecialidad().getEspecialidadId()
+                    ));
+            if (especialidadChanged) {
+                recetaRequest.setDoctor(null);
+                model.addAttribute("warning", "Selecciona un doctor");
+                return "recetario/modificar-receta";
+            }
+        } else{
+            model.addAttribute("doctores", List.of());
+            model.addAttribute("warning", "Seleciona una especialidad");
+            return "recetario/modificar-receta";
+        }
+
+        if (recetaRequest.getDoctor() == null ||
+                recetaRequest.getDoctor().getDoctorId() == null) {
+            model.addAttribute("warning", "Selecciona un doctor");
+            return "recetario/modificar-receta";
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("warning", "Corrige los errores del formulario");
+            return "recetario/modificar-receta";
+        }
+        recetarioService.save(recetaRequest);
+        return "redirect:/pacientes/detalle-recetas-paciente/" + pacienteId;
+
+    }
+
+
 
 
     @GetMapping("/{id}/pdf")

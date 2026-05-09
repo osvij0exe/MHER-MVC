@@ -22,11 +22,11 @@ public class HistoriaClinicaMapper {
         historia.setDescripcionEnfermedad(request.getDescripcionEnfermedad());
 
         Doctor doctor = new Doctor();
-        doctor.setId(request.getDoctorId());
+        doctor.setId(request.getDoctor().getDoctorId());
         historia.setDoctor(doctor);
 
         Paciente paciente = new Paciente();
-        paciente.setId(request.getPacienteId());
+        paciente.setId(request.getPaciente().getPacienteId());
         historia.setPaciente(paciente);
         return historia;
     }

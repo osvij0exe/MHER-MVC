@@ -11,6 +11,7 @@ import java.util.List;
 public interface IHistoriaClinicaService {
 
     HistoriaClinica findById(Integer id);
+    HistoriaClinicaResponse findHistoriaById(Integer id);
     HistoriaClinicaResponse save(HistoriaClinicaRequest reqeust);
     void deleteById(Integer id);
     HistoriaClinicaResponse update(HistoriaClinicaRequest reqeust);

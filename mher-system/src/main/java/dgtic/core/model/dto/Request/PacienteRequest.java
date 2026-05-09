@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 public class PacienteRequest {
 
-//    private Integer id;
+    private Integer pacienteId;
 
     @NotBlank(message = "El nombre es requerido")
     private String nombre;

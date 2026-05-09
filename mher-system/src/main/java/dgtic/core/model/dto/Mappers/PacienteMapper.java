@@ -13,7 +13,10 @@ public class PacienteMapper {
     public static Paciente ToEntity(PacienteRequest request)
     {
         Paciente paciente = new Paciente();
-//        paciente.setId(request.getId());
+        if(request.getPacienteId() != null)
+        {
+            paciente.setId(request.getPacienteId());
+        }
         paciente.setNombre(request.getNombre());
         paciente.setApellidos(request.getApellidos());
         paciente.setGenero(request.getGenero());

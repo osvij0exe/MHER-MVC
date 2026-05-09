@@ -26,6 +26,12 @@ public class HistoriaClinicaService implements IHistoriaClinicaService{
     }
 
     @Override
+    public HistoriaClinicaResponse findHistoriaById(Integer id) {
+        HistoriaClinica historiaClinica = historiaClinicaRepository.findById(id).orElse(null);
+        return HistoriaClinicaMapper.ToDto(historiaClinica);
+    }
+
+    @Override
     public HistoriaClinicaResponse save(HistoriaClinicaRequest reqeust) {
         HistoriaClinica historiaClinica = HistoriaClinicaMapper.ToEntity(reqeust);
         HistoriaClinica historiaClinicaSaved = historiaClinicaRepository.save(historiaClinica);

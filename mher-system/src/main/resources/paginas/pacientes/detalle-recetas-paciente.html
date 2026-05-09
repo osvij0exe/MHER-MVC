@@ -38,8 +38,8 @@
             </div>
             <div class="col-md-5">
                 <div class="form-group">
-                    <label for="genero" style="color: black;">Genero</label>
-                    <select class="form-control" disabled th:field="*{genero}" id="genero" name="genero" required>
+                    <label for="genero"  style="color: black;">Genero</label>
+                    <select  class="form-control" disabled th:field="*{genero}" id="genero" name="genero" required>
                         <option value="M">M</option>
                         <option value="F">F</option>
                     </select>
@@ -58,8 +58,8 @@
             <br/>
             <a th:href="@{/pacientes/modificar-paciente/{pacienteId} (pacienteId=${pacienteId})}"
                class="btn btn-success">Editar Paciente<i class="bi bi-pencil" aria-hidden="true"></i> </a>
-            <a th:href="@{/recetario/agregar-receta/paciente/{pacienteId}/receta/{recetaId}
-               (pacienteId=${paciente.pacienteId}, recetaId=0)}"
+            <a th:href="@{/recetario/agregar-receta/paciente/{pacienteId}
+               (pacienteId=${paciente.pacienteId})}"
                class="btn btn-info">
                 Agregar Receta
             </a>
@@ -88,11 +88,12 @@
             <td th:text="${rec.duracionDelTratamiento}"></td>
             <td th:text="${rec.doctor.nombre}"></td>
             <td th:text="${rec.doctor.apellidos}"></td>
-<!--            <td>-->
-<!--                <a th:href="@{/citas/modificar-cita/paciente/{pacienteId}/cita/{citaId}-->
-<!--                    (pacienteId=${pacienteId}, citaId=${cit.citaId})}"-->
-<!--                   class="btn btn-success">Modificar <i class="bi bi-pencil"-->
-<!--                                                        aria-hidden="true"></i> </a>-->
+            <td>
+                <a th:href="@{/recetario/modificar-receta/paciente/{pacienteId}/receta/{Id}
+                            (pacienteId=${paciente.pacienteId}, Id=${rec.id})}"
+                   class="btn btn-success">
+                    Modificar <i class="bi bi-pencil" aria-hidden="true"></i>
+                </a>
 <!--                <a th:href="@{/citas/eliminar-cita/paciente/{pacienteId}/cita/{citaId}-->
 <!--                 (pacienteId=${pacienteId}, citaId=${cit.citaId})}"-->
 <!--                   class="btn btn-danger"><i class="bi bi-trash-fill"-->

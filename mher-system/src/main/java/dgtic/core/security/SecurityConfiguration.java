@@ -36,10 +36,18 @@ public class SecurityConfiguration {
 //        JWTAuthenticationFilter jwtFilter = new JWTAuthenticationFilter(tokenProvider, uds);
         http
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/static/**","/bootstrap/**", "/iconos/**","/image/**","/tema/**","plantillas/**","principal/**","/security/**").permitAll()
-                        .requestMatchers("/paginas/citas/**","/paginas/pacientes/**").authenticated()
-                        .requestMatchers("/paginas/pacientes/**").hasAuthority("USER")
-                        .requestMatchers("/admin").hasAuthority("ADMIN")
+                        .requestMatchers("/bootstrap/**",
+                                "/iconos/**",
+                                "/image/**",
+                                "/tema/**",
+                                "paginas/plantillas/**",
+                                "paginas/principal/**",
+                                "/paginas/security/login",
+                                "/paginas/historiasClinicas/**",
+                                "paginas/recetario/**").permitAll()
+//                        .requestMatchers("/paginas/citas/**","/paginas/pacientes/**").authenticated()
+                        .requestMatchers("/paginas/doctores/**").hasAuthority("USER")
+                        .requestMatchers("/admin","/paginas/pacientes/**","paginas/security/signup_form").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
