@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class DoctorRequest {
-    private int doctorId;
+    private Integer doctorId;
     @NotBlank
     private String nombre;
     private String apellido;

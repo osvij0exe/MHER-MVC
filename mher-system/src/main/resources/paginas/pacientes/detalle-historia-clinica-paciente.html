@@ -58,8 +58,8 @@
             <br/>
             <a th:href="@{/pacientes/modificar-paciente/{pacienteId} (pacienteId=${pacienteId})}"
                class="btn btn-success">Editar Paciente<i class="bi bi-pencil" aria-hidden="true"></i> </a>
-            <a th:href="@{/citas/agregar-cita/{id}(id=${paciente.pacienteId})}"
-               class="btn btn-info">Agendar Cita<i class="bi bi-pencil" aria-hidden="true"></i> </a>
+            <a th:href="@{/historiasClinicas/agregar-historia-clinica/paciente/{pacienteId}(pacienteId=${paciente.pacienteId})}"
+               class="btn btn-info">Agregar Historia<i class="bi bi-pencil" aria-hidden="true"></i> </a>
             <a th:href="@{/pacientes/detalle-paciente/{id}(id=${paciente.pacienteId})}"
                class="btn btn-secondary">Consultas<i class="bi bi-pencil" aria-hidden="true"></i> </a>
             <a th:href="@{/pacientes/detalle-recetas-paciente/{id}(id=${paciente.pacienteId})}"
@@ -85,11 +85,11 @@
             <td th:text="${hist.descripcionEnfermedad}"></td>
             <td th:text="${hist.doctor.nombre}"></td>
             <td th:text="${hist.doctor.apellidos}"></td>
-<!--            <td>-->
-<!--                <a th:href="@{/citas/modificar-cita/paciente/{pacienteId}/cita/{citaId}-->
-<!--                    (pacienteId=${pacienteId}, citaId=${cit.citaId})}"-->
-<!--                   class="btn btn-success">Modificar <i class="bi bi-pencil"-->
-<!--                                                        aria-hidden="true"></i> </a>-->
+            <td>
+                <a th:href="@{/historiasClinicas/modificar-historia-clinica/paciente/{pacienteId}/historia/{Id}
+                    (pacienteId=${pacienteId}, Id=${hist.id})}"
+                   class="btn btn-success">Modificar <i class="bi bi-pencil"
+                                                        aria-hidden="true"></i> </a>
 <!--                <a th:href="@{/citas/eliminar-cita/paciente/{pacienteId}/cita/{citaId}-->
 <!--                 (pacienteId=${pacienteId}, citaId=${cit.citaId})}"-->
 <!--                   class="btn btn-danger"><i class="bi bi-trash-fill"-->
@@ -97,7 +97,7 @@
 <!--            </td>-->
 
             <td>
-                <a th:href="@{/historiaClinica/{id}/pdf(id=${hist.id})}"
+                <a th:href="@{/historiasClinicas/{id}/pdf(id=${hist.id})}"
                    class="btn btn-danger"
                    target="_blank">
                     Descargar PDF

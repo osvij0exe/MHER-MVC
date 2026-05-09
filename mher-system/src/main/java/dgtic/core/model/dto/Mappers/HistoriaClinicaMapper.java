@@ -1,9 +1,11 @@
 package dgtic.core.model.dto.Mappers;
 
 import dgtic.core.model.Entities.Doctor;
+import dgtic.core.model.Entities.Especialidad;
 import dgtic.core.model.Entities.HistoriaClinica;
 import dgtic.core.model.Entities.Paciente;
 import dgtic.core.model.dto.Request.HistoriaClinicaRequest;
+import dgtic.core.model.dto.Response.EspecialidadResponse;
 import dgtic.core.model.dto.Response.HistoriaClinicaResponse;
 
 import java.util.List;
@@ -15,6 +17,12 @@ public class HistoriaClinicaMapper {
         if(request == null) return null;
 
         HistoriaClinica historia = new HistoriaClinica();
+
+        if(request.getId() != null)
+        {
+            historia.setId(request.getId());
+        }
+
         historia.setAntecedentesMedicos(request.getAntecedentesMedicos());
         historia.setDiagnostico(request.getDiagnostico());
         historia.setMotivoDeLaConsulta(request.getMotivoDeLaConsulta());
@@ -23,6 +31,9 @@ public class HistoriaClinicaMapper {
 
         Doctor doctor = new Doctor();
         doctor.setId(request.getDoctor().getDoctorId());
+        Especialidad especialidad = new Especialidad();
+        especialidad.setId(request.getEspecialidad().getEspecialidadId());
+        doctor.setEspecialidad(especialidad);
         historia.setDoctor(doctor);
 
         Paciente paciente = new Paciente();
@@ -54,6 +65,9 @@ public class HistoriaClinicaMapper {
             Paciente paciente = historia.getPaciente();
             response.setPaciente(PacienteMapper.ToDto(paciente));
         }
+
+        EspecialidadResponse especialidadResponse = EspecialidadMapper.ToDto(historia.getDoctor().getEspecialidad());
+        response.setEspecialidad(especialidadResponse);
 
         return response;
     }

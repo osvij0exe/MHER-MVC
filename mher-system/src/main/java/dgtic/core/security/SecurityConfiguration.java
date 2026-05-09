@@ -47,7 +47,10 @@ public class SecurityConfiguration {
                                 "paginas/recetario/**").permitAll()
 //                        .requestMatchers("/paginas/citas/**","/paginas/pacientes/**").authenticated()
                         .requestMatchers("/paginas/doctores/**").hasAuthority("USER")
-                        .requestMatchers("/admin","/paginas/pacientes/**","paginas/security/signup_form").hasAuthority("ADMIN")
+                        .requestMatchers(
+                                "/admin","/paginas/pacientes/**",
+                                         "paginas/security/signup_form")
+                                .hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login

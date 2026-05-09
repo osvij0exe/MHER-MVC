@@ -7,10 +7,12 @@
     <main class="container text-center shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <h1 th:text="${contenido}"></h1>
 
-        <form th:action="@{/recetario/guardar-receta/paciente/{pacienteId}(pacienteId=${receta.paciente.pacienteId})}"
-              th:object="${receta}"
+        <form th:action="@{/historiasClinicas/modificar-historia-clinica/paciente/{pacienteId}/historia/{Id}
+                         (pacienteId=${historia.paciente.pacienteId}, Id=${historia.id})}"
+              th:object="${historia}"
               method="post">
             <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
+            <input type="hidden" name="Id" th:value="${historia.id}" />
             <input type="hidden" id="especialidadChanged" name="especialidadChanged" value="false">
             <div class="row">
                 <div class="col-md-5">
@@ -58,30 +60,49 @@
 <!--                -->
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="indicacionMedica" style="color: black;">Indicación Médica</label>
-                        <input type="text"  class="form-control" id="indicacionMedica" name="indicacionMedica"
-                               placeholder="Indicaciones" required="required"
-                               th:field="*{indicacionMedica}">
+                        <label for="motivoDeLaConsulta" style="color: black;">Motivo de la consulta</label>
+                        <input type="text"  class="form-control" id="motivoDeLaConsulta" name="indicacionMedica"
+                               placeholder="motivoDeLaConsulta" required="required"
+                               th:field="*{motivoDeLaConsulta}">
                     </div>
                 </div>
 
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="viaDeAdministracion" style="color: black;">Via de administración</label>
-                        <input type="text"  class="form-control" id="viaDeAdministracion" name="viaDeAdministracion"
-                               placeholder="via de administracion" required="required"
-                               th:field="*{viaDeAdministracion}">
+                        <label for="descripcionEnfermedad" style="color: black;">descripcion de la enfermeedad</label>
+                        <input type="text"  class="form-control" id="descripcionEnfermedad" name="descripcionEnfermedad"
+                               placeholder="Descripción" required="required"
+                               th:field="*{descripcionEnfermedad}">
                     </div>
                 </div>
 
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="duracionDelTratamiento" style="color: black;">Duracion del tratamiento</label>
-                        <input type="text"  class="form-control" id="duracionDelTratamiento" name="duracionDelTratamiento"
-                               placeholder="duracion del tratamiento estimado" required="required"
-                               th:field="*{duracionDelTratamiento}">
+                        <label for="antecedentesMedicos" style="color: black;">Antecedentes Médicos</label>
+                        <input type="text"  class="form-control" id="antecedentesMedicos" name="antecedentesMedicos"
+                               placeholder="Descripción de los antecedentes médicos del paciente" required="required"
+                               th:field="*{antecedentesMedicos}">
                     </div>
                 </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="diagnostico" style="color: black;">Diagnostico</label>
+                        <input type="text"  class="form-control" id="diagnostico" name="antecedentesMedicos"
+                               placeholder="Descripción del diagnostico del paciente" required="required"
+                               th:field="*{diagnostico}">
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="tratamientoMedico" style="color: black;">Tratamiento </label>
+                        <input type="text"  class="form-control" id="tratamientoMedico" name="tratamientoMedico"
+                               placeholder="Descripción del tratamiento del paciente" required="required"
+                               th:field="*{tratamientoMedico}">
+                    </div>
+                </div>
+
 
 <!--                                -->
                 <div class="col-md-5">
@@ -121,8 +142,8 @@
             </div>
             <div class="col-md-3 mr-3">
                 <br/>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a th:href="@{/pacientes/detalle-recetas-paciente/{pacienteId}(pacienteId=${paciente.pacienteId})}"
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <a th:href="@{/pacientes/detalle-historia-clinica-paciente/{pacienteId}(pacienteId=${historia.paciente.pacienteId})}"
                    class="btn btn-info">Regresar</a>
             </div>
         </form>

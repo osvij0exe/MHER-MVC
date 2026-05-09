@@ -157,7 +157,7 @@ public class recetarioController {
             model.addAttribute("warning", "Corrige los errores del formulario");
             return "recetario/modificar-receta";
         }
-        recetarioService.save(recetaRequest);
+        recetarioService.update(recetaRequest);
         return "redirect:/pacientes/detalle-recetas-paciente/" + pacienteId;
 
     }

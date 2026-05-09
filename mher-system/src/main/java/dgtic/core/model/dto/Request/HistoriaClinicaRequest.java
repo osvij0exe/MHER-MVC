@@ -11,6 +11,8 @@ import lombok.*;
 @Builder
 public class HistoriaClinicaRequest {
 
+    private Integer Id;
+
     private String motivoDeLaConsulta;
 
     private String descripcionEnfermedad;
@@ -24,6 +26,8 @@ public class HistoriaClinicaRequest {
     private DoctorRequest doctor;
 
     private PacienteResponse paciente;
+
+    private  EspecialidadRequest especialidad;
 
 
 }

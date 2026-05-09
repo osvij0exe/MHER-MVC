@@ -30,6 +30,7 @@ public class HistoriaClinicaResponse {
 
     public PacienteResponse paciente;
 
+    public EspecialidadResponse especialidad;
 
 
 }
